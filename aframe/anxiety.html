@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <title>Anxiety</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/dev/aframe/build/aframe-ar.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body style="margin : 0px; overflow: hidden;">
+
+  <a-scene embedded arjs renderer="precision: mediump; antialias: false; alpha: true; logarithmicDepthBuffer: true; colorManagement: true;" vr-mode-ui="enabled: false">
+
+
+    <a-assets>
+      <a-asset-item id="anxiety" src="./anxietycenter.glb"></a-asset-item>
+    </a-assets>
+
+    <a-marker type="pattern" url="./pattern-anxietycenter.patt" >
+      <a-entity position="0 0 0" rotation="0 0 0" scale="1 1 1" gltf-model="#anxiety" animation-mixer>
+      </a-entity>
+    </a-marker>
+
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+
+</body>
+
+
+
+</html>
