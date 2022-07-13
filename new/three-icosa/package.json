@@ -1,0 +1,77 @@
+{
+  "_from": "three-icosa",
+  "_id": "three-icosa@0.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-0klokubyxGwW27hP3iq3VyTUVyNIdFYQWcvOnwNg8bleFYLgN1+lYvHTeYFxoJABBu9BXWSd1m1y18x/+OT31g==",
+  "_location": "/three-icosa",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "three-icosa",
+    "name": "three-icosa",
+    "escapedName": "three-icosa",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/three-icosa/-/three-icosa-0.4.0.tgz",
+  "_shasum": "881ccb2094f3d9bfdc42666916352b21b00caa1d",
+  "_spec": "three-icosa",
+  "_where": "F:\\Pro\\Keisuugiken\\AR Location Based\\ar-sculpture",
+  "author": {
+    "name": "Icosa Gallery"
+  },
+  "bugs": {
+    "url": "https://github.com/icosa-gallery/three-icosa/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Implements Tilt Brush/Open Brush related glTF extensions in three.js",
+  "devDependencies": {
+    "rollup": "^2.70.1",
+    "rollup-plugin-dts": "^4.2.0",
+    "terser": "^5.12.0",
+    "typescript": "^4.6.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/icosa"
+  },
+  "homepage": "https://github.com/icosa-gallery/three-icosa#readme",
+  "keywords": [
+    "three",
+    "three.js",
+    "gltf",
+    "extension",
+    "loader",
+    "openbrush",
+    "tiltbrush",
+    "creative",
+    "camera",
+    "vr",
+    "ar",
+    "xr"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/three-icosa.js",
+  "module": "dist/three-icosa.module.js",
+  "name": "three-icosa",
+  "peerDependencies": {
+    "three": ">=0.139.0"
+  },
+  "scripts": {
+    "build": "rollup --config && terser dist/three-icosa.js -o dist/three-icosa.min.js",
+    "dev": "rollup --config --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "types": "dist/three-icosa.d.ts",
+  "version": "0.4.0"
+}
