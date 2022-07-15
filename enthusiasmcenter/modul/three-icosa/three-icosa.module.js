@@ -4,27 +4,27 @@
  * Copyright (c) 2021-2022 Icosa Gallery
  * Released under the Apache 2.0 Licence.
  */
-import { Vector4, Vector3, Loader, FileLoader, TextureLoader, RepeatWrapping, UniformsLib, RawShaderMaterial, Clock } from 'three';
+import { Vector4, Vector3, Loader, FileLoader, TextureLoader, RepeatWrapping, UniformsLib, RawShaderMaterial, Clock } from '../three/build/three.module.js';
 
 // Copyright 2021-2022 Icosa Gallery
 
 class TiltShaderLoader extends Loader {
     constructor( manager ) {
         super( manager );
-        
+
         this.loadedMaterials = {};
     }
-    
+
     async load(brushName, onLoad, onProgress, onError ) {
         const scope = this;
 
         const isAlreadyLoaded = this.loadedMaterials[brushName];
-        
+
         if (isAlreadyLoaded !== undefined) {
             onLoad( scope.parse( isAlreadyLoaded ) );
             return;
         }
-        
+
 		const loader = new FileLoader( this.manager );
 		loader.setPath( this.path );
 		loader.setResponseType( 'text' );
@@ -116,23 +116,23 @@ class TiltShaderLoader extends Loader {
             case "1161af82-50cf-47db-9706-0c3576d43c43":
             case "79168f10-6961-464a-8be1-57ed364c5600":
                 return "CoarseBristles";
-                
+
             case "Comet":
             case "1caa6d7d-f015-3f54-3a4b-8b5354d39f81":
                 return "Comet";
-            
+
             case "DiamondHull":
             case "c8313697-2563-47fc-832e-290f4c04b901":
                 return "DiamondHull";
-            
+
             case "Disco":
             case "4391aaaa-df73-4396-9e33-31e4e4930b27":
                 return "Disco";
-            
+
             case "DotMarker":
             case "d1d991f2-e7a0-4cf1-b328-f57e915e6260":
                 return "DotMarker";
-            
+
             case "Dots":
             case "6a1cf9f9-032c-45ec-9b1d-a6680bee30f7":
                 return "Dots";
@@ -140,16 +140,16 @@ class TiltShaderLoader extends Loader {
             case "DoubleTaperedFlat":
             case "0d3889f3-3ede-470c-8af4-f44813306126":
                 return "DoubleTaperedFlat";
-            
+
             case "DoubleTaperedMarker":
             case "0d3889f3-3ede-470c-8af4-de4813306126":
                 return "DoubleTaperedMarker";
-            
+
             case "DuctTape":
             case "d0262945-853c-4481-9cbd-88586bed93cb":
             case "3ca16e2f-bdcd-4da2-8631-dcef342f40f1":
                 return "DuctTape";
-            
+
             case "Electricity":
             case "f6e85de3-6dcc-4e7f-87fd-cee8c3d25d51":
                 return "Electricity";
@@ -157,11 +157,11 @@ class TiltShaderLoader extends Loader {
             case "Embers":
             case "02ffb866-7fb2-4d15-b761-1012cefb1360":
                 return "Embers";
-            
+
             case "EnvironmentDiffuse":
-            case "0ad58bbd-42bc-484e-ad9a-b61036ff4ce7": 
+            case "0ad58bbd-42bc-484e-ad9a-b61036ff4ce7":
                 return "EnvironmentDiffuse";
-            
+
             case "EnvironmentDiffuseLightMap":
             case "d01d9d6c-9a61-4aba-8146-5891fafb013b":
                 return "EnvironmentDiffuseLightMap";
@@ -175,16 +175,16 @@ class TiltShaderLoader extends Loader {
             case "55303bc4-c749-4a72-98d9-d23e68e76e18":
             case "Flat":
                 return "Flat";
-            
+
             case "cf019139-d41c-4eb0-a1d0-5cf54b0a42f3":
             case "geometry_Highlighter":
                 return "Highlighter";
-            
+
             case "Hypercolor":
             case "dce872c2-7b49-4684-b59b-c45387949c5c":
             case "e8ef32b1-baa8-460a-9c2c-9cf8506794f5":
                 return "Hypercolor";
-            
+
             case "HyperGrid":
             case "6a1cf9f9-032c-45ec-9b6e-a6680bee32e9":
                 return "HyperGrid";
@@ -192,7 +192,7 @@ class TiltShaderLoader extends Loader {
             case "Icing":
             case "2f212815-f4d3-c1a4-681a-feeaf9c6dc37":
                 return "Icing";
-            
+
             case "Ink":
             case "f5c336cf-5108-4b40-ade9-c687504385ab":
             case "c0012095-3ffd-4040-8ee1-fc180d346eaa":
@@ -210,7 +210,7 @@ class TiltShaderLoader extends Loader {
             case "LightWire":
             case "4391aaaa-df81-4396-9e33-31e4e4930b27":
                 return "LightWire";
-            
+
             case "Lofted":
             case "d381e0f5-3def-4a0d-8853-31e9200bcbda":
                 return "Lofted";
@@ -218,7 +218,7 @@ class TiltShaderLoader extends Loader {
             case "Marker":
             case "429ed64a-4e97-4466-84d3-145a861ef684":
                 return "Marker";
-            
+
             case "MatteHull":
             case "79348357-432d-4746-8e29-0e25c112e3aa":
                 return "MatteHull";
@@ -236,15 +236,15 @@ class TiltShaderLoader extends Loader {
             case "f1114e2e-eb8d-4fde-915a-6e653b54e9f5":
             case "759f1ebd-20cd-4720-8d41-234e0da63716":
                 return "Paper";
-            
+
             case "PbrTemplate":
             case "f86a096c-2f4f-4f9d-ae19-81b99f2944e0":
                 return "PbrTemplate";
-            
+
             case "PbrTransparentTemplate":
             case "19826f62-42ac-4a9e-8b77-4231fbd0cfbf":
                 return "PbrTransparentTemplate";
-            
+
             case "Petal":
             case "e0abbc80-0f80-e854-4970-8924a0863dcc":
                 return "Petal";
@@ -252,7 +252,7 @@ class TiltShaderLoader extends Loader {
             case "Plasma":
             case "c33714d1-b2f9-412e-bd50-1884c9d46336":
                 return "Plasma";
-            
+
             case "Rainbow":
             case "ad1ad437-76e2-450d-a23a-e17f8310b960":
                 return "Rainbow";
@@ -264,7 +264,7 @@ class TiltShaderLoader extends Loader {
             case "Smoke":
             case "70d79cca-b159-4f35-990c-f02193947fe8":
                 return "Smoke";
-            
+
             case "Snow":
             case "d902ed8b-d0d1-476c-a8de-878a79e3a34c":
                 return "Snow";
@@ -272,16 +272,16 @@ class TiltShaderLoader extends Loader {
             case "SoftHighlighter":
             case "accb32f5-4509-454f-93f8-1df3fd31df1b":
                 return "SoftHighlighter";
-            
+
             case "Spikes":
             case "cf7f0059-7aeb-53a4-2b67-c83d863a9ffa":
                 return "Spikes";
-            
+
             case "Splatter":
             case "8dc4a70c-d558-4efd-a5ed-d4e860f40dc3":
             case "7a1c8107-50c5-4b70-9a39-421576d6617e":
                 return "Splatter";
-            
+
             case "Stars":
             case "0eb4db27-3f82-408d-b5a1-19ebd7d5b711":
                 return "Stars";
@@ -289,7 +289,7 @@ class TiltShaderLoader extends Loader {
             case "Streamers":
             case "44bb800a-fbc3-4592-8426-94ecb05ddec3":
                 return "Streamers";
-            
+
             case "Taffy":
             case "0077f88c-d93a-42f3-b59b-b31c50cdb414":
                 return "Taffy";
@@ -308,7 +308,7 @@ class TiltShaderLoader extends Loader {
             case "75b32cf0-fdd6-4d89-a64b-e2a00b247b0f":
             case "fdf0326a-c0d1-4fed-b101-9db0ff6d071f":
                 return "ThickPaint";
-            
+
             case "Toon":
             case "4391385a-df73-4396-9e33-31e4e4930b27":
                 return "Toon";
@@ -316,7 +316,7 @@ class TiltShaderLoader extends Loader {
             case "UnlitHull":
             case "a8fea537-da7c-4d4b-817f-24f074725d6d":
                 return "UnlitHull";
-            
+
             case "VelvetInk":
             case "d229d335-c334-495a-a801-660ac8a87360":
                 return "VelvetInk";
@@ -577,7 +577,7 @@ const tiltBrushMaterialParams = {
         depthWrite: true,
         depthTest: true,
         blending: 0,
-        
+
     },
     "Dots" : {
         uniforms: {
@@ -1001,7 +1001,7 @@ const tiltBrushMaterialParams = {
         depthWrite: true,
         depthTest: true,
         blending: 0,
-        
+
     },
     "MatteHull" : {
         uniforms: {
@@ -1665,9 +1665,9 @@ class GLTFGoogleTiltBrushMaterialExtension {
                     if (!mat.extensions || !mat.extensions[this.name]) {
                         return;
                     }
-                    
+
                     const guid = mat.extensions.GOOGLE_tilt_brush_material.guid;
-                    
+
                     shaderResolves.push(this.replaceMaterial(object, guid));
                 });
             });
@@ -2278,7 +2278,7 @@ class GLTFGoogleTiltBrushMaterialExtension {
 
             case "d902ed8b-d0d1-476c-a8de-878a79e3a34c":
                 mesh.geometry.name = "geometry_Snow";
-                
+
                 mesh.geometry.setAttribute("a_position", mesh.geometry.getAttribute("position"));
                 mesh.geometry.setAttribute("a_normal", mesh.geometry.getAttribute("_tb_unity_normal"));
                 mesh.geometry.setAttribute("a_color", mesh.geometry.getAttribute("color"));
@@ -2515,7 +2515,7 @@ class GLTFGoogleTiltBrushMaterialExtension {
             default:
                 console.warn(`Could not find brush with guid ${guid}!`);
         }
-        
+
         mesh.onBeforeRender = (renderer, scene, camera, geometry, material, group) => {
             if (material.uniforms["u_time"]) {
                 const elapsedTime = this.clock.getElapsedTime();
@@ -2532,7 +2532,7 @@ class GLTFGoogleTiltBrushMaterialExtension {
             if(material?.uniforms?.directionalLights?.value) {
                 // Main Light
                 if(material.uniforms.directionalLights.value[0]) {
-                    
+
                     // Color
                     if(material.uniforms.u_SceneLight_0_color) {
                         const color = material.uniforms.directionalLights.value[0].color;
@@ -2542,7 +2542,7 @@ class GLTFGoogleTiltBrushMaterialExtension {
 
                 // Shadow Light
                 if(material.uniforms.directionalLights.value[1]) {
-    
+
                     // Color
                     if(material.uniforms.u_SceneLight_1_color) {
                         const color = material.uniforms.directionalLights.value[1].color;

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <!-- <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> -->
+<title>Hello, AR!</title>
 <!-- three.js library -->
 <script src='./vendor/three.js/build/three.js'></script>
-<script src="https://rawcdn.githack.com/mrdoob/three.js/r132/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://rawcdn.githack.com/mrdoob/three.js/r132/examples/js/loaders/DRACOLoader.js"></script>
+<!-- <script src='./vendor/three.js/build/examples/js/loaders/GLTFLoader.js'></script> -->
+<script src="https://rawcdn.githack.com/mrdoob/three.js/r134/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://rawcdn.githack.com/mrdoob/three.js/r134/examples/js/loaders/DRACOLoader.js"></script>
 <!-- ar.js -->
 <script src="./build/ar-threex.js"></script>
-
-<!-- Three Icosa -->
-	<script src="./three-icosa/three-icosa.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = './'</script>
 
+<!-- <script src="./modul/three-icosa/three-icosa.js"></script> -->
+
+
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
-	<!-- <div style='position: absolute; top: 10px; width:100%; text-align: center; z-index: 1;'>
-		<a href="https://github.com/AR-js-org/AR.js/" target="_blank">AR.js</a> - three.js camera transform
-		<br />
-		Contact me any time at <a href='https://twitter.com/nicolocarp' target='_blank'>@nicolocarp</a>
-	</div> -->
-	<script>
+
+
+	<script type="module">
+
 		//////////////////////////////////////////////////////////////////////////////////
 		//		Init
 		//////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@
 			antialias: true,
 			alpha: true
 		});
-		renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+		// renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 		renderer.setSize(640, 480);
 		renderer.domElement.style.position = 'absolute'
 		renderer.domElement.style.top = '0px'
@@ -40,6 +40,19 @@
 
 		// init scene and camera
 		var scene = new THREE.Scene();
+
+		//////////////////////////////////////////////////////////////////////////////////
+		//		Initialize a Light
+		//////////////////////////////////////////////////////////////////////////////////
+		const directionalLight = new THREE.DirectionalLight("#ffffff", 1);
+		const directionalLight2 = new THREE.DirectionalLight("#ffffff", 1);
+		directionalLight.position.set(10, 10, 0);
+		directionalLight2.position.set(-10, -10, 10);
+		scene.add(directionalLight);
+		scene.add(directionalLight2);
+
+		// var ambientLight = new THREE.AmbientLight( 0xcccccc, 10.0 );
+		// scene.add( ambientLight );
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//		Initialize a basic camera
@@ -57,8 +70,8 @@
 			// to read from the webcam
 			sourceType: 'webcam',
 
-			// sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
-			// sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
+			sourceWidth: window.innerWidth > window.innerHeight ? 640 : 480,
+			sourceHeight: window.innerWidth > window.innerHeight ? 480 : 640,
 
 			// // to read from an image
 			// sourceType : 'image',
@@ -170,62 +183,55 @@
 		//////////////////////////////////////////////////////////////////////////////////
 		//		add an object in the scene
 		//////////////////////////////////////////////////////////////////////////////////
-		function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
-		function onError(xhr) { console.log( 'An error happened' ); }
+		// function onProgress(xhr) { console.log( (xhr.loaded / xhr.total * 100) + '% loaded' ); }
+		// function onError(xhr) { console.log( 'An error happened' ); }
 
-		var loader = new THREE.GLTFLoader();
-
-		// loader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, 'https://icosa-gallery.github.io/three-icosa-template/brushes/'));
-		// const dracoLoader = new THREE.DRACOLoader();
-		// dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
-		// loader.setDRACOLoader(dracoLoader);
-
-		loader.load(
-				// resource URL
-				'./models/enthusiasmcenter.glb',
-				// called when the resource is loaded
-				function ( gltf ) {
-
-								mesh = gltf.scene;
-								mesh.scale.set( 3, 3, 3 );
-								scene.add( mesh );
-
-								//scene.add( gltf.scene );
-
-								//gltf.animations; // Array<THREE.AnimationClip>
-								//gltf.scene; // THREE.Scene
-								//gltf.scenes; // Array<THREE.Scene>
-								//gltf.cameras; // Array<THREE.Camera>
-								//gltf.asset; // Object
-
-				},
-				onProgress,
-				onError
-		);
+		// build markerControls
 
 
-		// add a torus knot
-		// var geometry = new THREE.BoxGeometry(1, 1, 1);
-		// var material = new THREE.MeshNormalMaterial({
-		// 	transparent: true,
-		// 	opacity: 0.5,
-		// 	side: THREE.DoubleSide
-		// });
-		// var mesh = new THREE.Mesh(geometry, material);
-		// mesh.position.y = geometry.parameters.height / 2
-		// scene.add(mesh);
 
+		// import { Viewer } from "./icosa-viewer/hasil/icosa-viewer.module.js";
 
+	  // var viewer = new Viewer("https://icosa-gallery.github.io/three-icosa-template/brushes/");
+		// var hasil  = await viewer.loadGltf("./models/enthusiasmcenter.glb");
+		// scene.add(viewer.loadGltf("./models/enthusiasmcenter.glb"));
+
+		import { GLTFGoogleTiltBrushMaterialExtension } from "./modul/three-icosa/three-icosa.module.js";
+		var gltfLoader = new THREE.GLTFLoader();
+
+		gltfLoader.register(parser => new GLTFGoogleTiltBrushMaterialExtension(parser, 'https://icosa-gallery.github.io/three-icosa-template/brushes/'));
+		const dracoLoader = new THREE.DRACOLoader();
+		dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+		gltfLoader.setDRACOLoader(dracoLoader);
+
+		loadGltf('./models/enthusiasmcenter.glb');
+
+		async function loadGltf(url) {
+	    const gltf = await gltfLoader.loadAsync(url);
+			const loadedModel = gltf.scene;
+			loadedModel.scale.set( 4, 4, 4 );
+			scene.add(loadedModel);
+	  //   const gltf = await viewer.loadGltf(url);
+		// 	// gltf.scale.set( 3, 3, 3 );
 		//
-		// var geometry = new THREE.TorusKnotGeometry(0.3, 0.1, 64, 16);
-		// var material = new THREE.MeshNormalMaterial();
-		// var mesh = new THREE.Mesh(geometry, material);
-		// mesh.position.y = 0.5
-		// scene.add(mesh);
+		}
+
+
+
+		// gltfLoader.load(
+		// 		// resource URL
+		// 		'./models/enthusiasmcenter.glb',
+		// 		// called when the resource is loaded
+		// 		function ( gltf ) {
 		//
-		// onRenderFcts.push(function (delta) {
-		// 	mesh.rotation.x += Math.PI * delta
-		// })
+		// 						mesh = gltf.scene;
+		// 						mesh.scale.set( 3, 3, 3 );
+		// 						scene.add( mesh );
+		//
+		// 		}
+		//
+		// );
+
 
 		//////////////////////////////////////////////////////////////////////////////////
 		//		render the whole thing on the page
@@ -234,6 +240,7 @@
 		// render the scene
 		onRenderFcts.push(function () {
 			renderer.render(scene, camera);
+			// renderer.render(scene, camera);
 		})
 
 		// run the rendering loop
