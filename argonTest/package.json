@@ -1,0 +1,12 @@
+{
+  "name": "app",
+  "dependencies": {
+    "@argonjs/argon": "~1.0.0",
+    "three": "^0.144.0",
+    "three.ar.js": "^0.1.8",
+    "three.js": "^0.77.1"
+  },
+  "devDependencies": {
+    "@jspm/core": "^1.1.1"
+  }
+}
