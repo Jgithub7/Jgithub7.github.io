@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>XR Spinosaurus</title>
+	<title>XR Yashagaike</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -145,11 +145,8 @@
 
 <a-scene webxr="requiredFeatures: hit-test,local-floor;">
 	<a-assets>
-		<!-- Model source: https://sketchfab.com/3d-models/spinosaurus-2135501583704537907645bf723685e7
-             Model author: https://sketchfab.com/VapTor
-             Model license: CC Attribution -->
-		<a-asset-item id="spinosaurus"
-					  src="https://cdn.glitch.com/324a5290-5aa7-4efc-92d6-ae0736433b12%2Fspinosaurus.glb"
+		<a-asset-item id="yashagaike"
+					  src="yashagaike.gltf"
 					  response-type="arraybuffer"></a-asset-item>
 
 		<a-asset-item id="reticle"
@@ -165,7 +162,7 @@
 
 	<a-entity id="dino" position="-1 0 -3" scale="0.5 0.5 0.5">
 		<a-entity position="0 2.15 0" rotation="0 55 0"
-				  gltf-model="#spinosaurus"
+				  gltf-model="#yashagaike"
 				  animation-mixer
 				  shadow="cast: true; receive: false"></a-entity>
 
