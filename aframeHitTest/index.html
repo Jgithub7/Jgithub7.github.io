@@ -145,21 +145,14 @@
 
 <a-scene webxr="requiredFeatures: hit-test,local-floor;">
 	<a-assets>
-		<!-- Model source: https://sketchfab.com/3d-models/spinosaurus-2135501583704537907645bf723685e7
-             Model author: https://sketchfab.com/VapTor
-             Model license: CC Attribution -->
-		<a-asset-item id="spinosaurus"
-					  src="https://cdn.glitch.com/324a5290-5aa7-4efc-92d6-ae0736433b12%2Fspinosaurus.glb"
-					  response-type="arraybuffer"></a-asset-item>
-
-		<a-asset-item id="reticle"
-					  src="reticle.gltf"
+		<a-asset-item id="yashagaike"
+					  src="yashagaike.gltf"
 					  response-type="arraybuffer"></a-asset-item>
 	</a-assets>
 
 	<a-camera position="0 1.2 0"></a-camera>
 
-	<!-- Environment for 2D and VR viewing. It's auto-hidden in AR mode. -->
+	<!-- Environment for 2D and VR viewing. It's auto-hidden in AR mode. >
 	<a-entity environment="preset: forest; lighting: none; shadow: none; lightPosition: 0 2.15 0"
 			  hide-in-ar-mode></a-entity>
 
@@ -169,13 +162,13 @@
 				  animation-mixer
 				  shadow="cast: true; receive: false"></a-entity>
 
-		<!-- This shadow-receiving plane is only visible in AR mode.-->
+		<This shadow-receiving plane is only visible in AR mode.>
 		<a-plane height="30" width="30" rotation="-90 0 0"
 				 shadow="receive: true"
 				 ar-shadows="opacity: 0.2"
 				 visible="false"></a-plane>
 
-	</a-entity>
+	</a-entity-->
 
 	<a-entity light="type: hemisphere; intensity: 1"></a-entity>
 	<a-light type="directional"
@@ -191,25 +184,15 @@
 			 position="-2 4 2">
 	</a-light>
 
-	<a-entity gltf-model="#reticle" scale="0.8 0.8 0.8" ar-hit-test></a-entity>
+	<a-entity gltf-model="#yashagaike" scale="0.8 0.8 0.8" ar-hit-test></a-entity>
 </a-scene>
 
 <div id="text">
-	<h1>A-Frame Spinosaurus for VR/AR</h1>
-
-	<p>
-		Model: <a href="https://sketchfab.com/3d-models/spinosaurus-2135501583704537907645bf723685e7">Spinosaurus</a> by
-		<a href="https://sketchfab.com/VapTor">Vaptor-Studio</a>.
-	</p>
 	<p>
 		Size:
 		<button id="btn_full">Full</button>
 		<button id="btn_half">1/2</button>
 		<button id="btn_quarter">1/16</button>
-	</p>
-
-	<p>
-		Try the WebXR's AR mode with an Android phone and Chrome (Beta) v81+.
 	</p>
 </div>
 <script>
