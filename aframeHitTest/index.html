@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>XR Spinosaurus</title>
+	<title>XR Yashagaike</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -145,8 +145,8 @@
 
 <a-scene webxr="requiredFeatures: hit-test,local-floor;">
 	<a-assets>
-		<a-asset-item id="yashagaike"
-					  src="yashagaike.gltf"
+		<a-asset-item id="reticle"
+					  src="reticle.gltf"
 					  response-type="arraybuffer"></a-asset-item>
 	</a-assets>
 
@@ -158,7 +158,7 @@
 
 	<a-entity id="dino" position="-1 0 -3" scale="0.5 0.5 0.5">
 		<a-entity position="0 2.15 0" rotation="0 55 0"
-				  gltf-model="#spinosaurus"
+				  gltf-model="#yashagaike"
 				  animation-mixer
 				  shadow="cast: true; receive: false"></a-entity>
 
@@ -184,7 +184,7 @@
 			 position="-2 4 2">
 	</a-light>
 
-	<a-entity gltf-model="#yashagaike" scale="0.8 0.8 0.8" ar-hit-test></a-entity>
+	<a-entity gltf-model="#reticle" scale="0.8 0.8 0.8" ar-hit-test></a-entity>
 </a-scene>
 
 <div id="text">
