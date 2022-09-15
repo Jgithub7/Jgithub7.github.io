@@ -95,11 +95,11 @@
 						let position = element.getAttribute('position');
 
 						document.getElementById('dino').setAttribute('position', position);
-						document.getElementById('light').setAttribute('position', {
+						/*document.getElementById('light').setAttribute('position', {
 							x: (position.x - 2),
 							y: (position.y + 4),
 							z: (position.z + 2)
-						});
+						});*/
 					});
 
 					session.requestReferenceSpace('viewer').then((space) => {
@@ -173,7 +173,7 @@
 
 	</a-entity>
 
-	<a-entity light="type: hemisphere; intensity: 1"></a-entity>
+	<!--a-entity light="type: hemisphere; intensity: 1"></a-entity>
 	<a-light type="directional"
 			 light="castShadow: true;
                       shadowMapHeight: 1024;
@@ -185,7 +185,7 @@
 			 id="light"
 			 target="dino"
 			 position="-2 4 2">
-	</a-light>
+	</a-light-->
 
 	<a-entity gltf-model="#reticle" scale="0.8 0.8 0.8" ar-hit-test></a-entity>
 </a-scene>
