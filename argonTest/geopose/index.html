@@ -4,20 +4,25 @@
     <title>Geo</title>
     <script src="../resources/lib/three/three.min.js"></script>
     <script src="../resources/lib/argon.min.js"></script>
+
+    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script>
+        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+    </script>
+    
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
-  <body>
+  <body style='margin: 0; overflow: hidden;'>
     <div id="argon">
-      <div onclick="hideMe(this)" id="description" >
-        <h2>A Simple Geo example</h2>
-        <h5>(click to dismiss)</h5>
-        <p>This example takes the current location of the viewer, and positions a cube a small distance away from where the viewer was positioned when the example was loaded.  We do this by adding a small amount to our current east-west location, in the local Three.js cartesian coordinates.  This illustrates how to create geospatial content based on the current location, and update the internal geospatial location of the object.</p>
-      </div>
+      <a-scene
+        vr-mode-ui="enabled: false"
+		embedded
+        arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'>
+        <a-camera gps-camera rotation-reader></a-camera>
+	</a-scene>
     </div>
   </body>
-	<script>
-		function hideMe(elem) {
-		    elem.style.display = 'none';
-		}	
-	</script>  <script src="./app.js"></script>
+	<script src="./app.js"></script>
 </html>
