@@ -152,7 +152,7 @@
 
 	<a-camera position="0 1.2 0"></a-camera>
 
-	<!-- Environment for 2D and VR viewing. It's auto-hidden in AR mode. >
+	<!-- Environment for 2D and VR viewing. It's auto-hidden in AR mode. -->
 	<a-entity environment="preset: forest; lighting: none; shadow: none; lightPosition: 0 2.15 0"
 			  hide-in-ar-mode></a-entity>
 
@@ -162,13 +162,13 @@
 				  animation-mixer
 				  shadow="cast: true; receive: false"></a-entity>
 
-		<This shadow-receiving plane is only visible in AR mode.>
+		<!--This shadow-receiving plane is only visible in AR mode.-->
 		<a-plane height="30" width="30" rotation="-90 0 0"
 				 shadow="receive: true"
 				 ar-shadows="opacity: 0.2"
 				 visible="false"></a-plane>
 
-	</a-entity-->
+	</a-entity>
 
 	<a-entity light="type: hemisphere; intensity: 1"></a-entity>
 	<a-light type="directional"
