@@ -47,9 +47,9 @@
 			curveEl.setAttribute('closed',  true);
 			sceneEl.setAttribute('ar-hit-test', 'enabled', false);
 			endPointCircle.setAttribute('visible', false);
-			cart.components['roller-coaster'].t = 0;
-			cart.components['roller-coaster'].speed = 0;
-			cart.setAttribute('visible', true);
+			//cart.components['roller-coaster'].t = 0;
+		    //cart.components['roller-coaster'].speed = 0;
+			//cart.setAttribute('visible', true);
 		}
 	}
 	sceneEl.addEventListener('enter-vr', function () {
@@ -77,7 +77,7 @@
 				const p = lastPlacedPoint.object3D.position;
 				curveEl.pause();
 				const o = __tempVec1.set(0,0,0.5).applyQuaternion(lastPlacedPoint.object3D.quaternion);
-				el.setAttribute('gltf-model', "#flag-glb");
+				el.setAttribute('gltf-model', "#yashagaike");
 				el.setAttribute('position', `${p.x + o.x} ${p.y + o.y} ${p.z + o.z}`);
 				el.setAttribute('scale', `0.4 0.4 0.4`);
 				el.id=id;
