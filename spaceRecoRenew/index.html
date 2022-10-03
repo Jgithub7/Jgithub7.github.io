@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>XR Yashagaike</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+	<script src="https://raw.githack.com/AR-js-org/AR.js/dev/aframe/build/aframe-ar.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow/tfjs-automl"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<script>
+		// Define a few custom components useful for AR mode. While these are somewhat reusable,
+		// I recommend checking if there are officially supported alternatives before copying
+		// these into new projects.
+
+		// See also https://github.com/aframevr/aframe/pull/4356
+		AFRAME.registerComponent('hide-in-ar-mode', {
+			// Set this object invisible while in AR mode.
+			init: function () {
+				this.el.sceneEl.addEventListener('enter-vr', (ev) => {
+					this.wasVisible = this.el.getAttribute('visible');
+					if (this.el.sceneEl.is('ar-mode')) {
+						this.el.setAttribute('visible', false);
+					}
+				});
+				this.el.sceneEl.addEventListener('exit-vr', (ev) => {
+					if (this.wasVisible) this.el.setAttribute('visible', true);
+				});
+			}
+		});
+
+		
+
+		
+
+	</script>
+
+</head>
+<body style="margin : 0px; overflow: hidden;">
+
+  <!-- <video id="main-stream-video" width="100%" height="100%"></video> -->
+
+  <a-scene webxr="requiredFeatures: hit-test,local-floor;" renderer=" physicallyCorrectLights: true;"  vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
+      <!-- Model -->
+      <a-assets>
+		<a-asset-item id="yashagaike"
+					  src="yashagaike.gltf"
+					  response-type="arraybuffer"></a-asset-item>
+
+		
+	</a-assets>
+
+      <!--a-camera gps-camera rotation-reader-->
+      <a-camera rotation-reader>
+        <video id="main-stream-video" width="480" height="360" >
+
+        </video>
+      </a-camera>
+
+
+    </a-scene>
+
+
+    <script>
+        model = null;
+        var executed = true;
+        var myInterval;
+
+        var optionsNewcoord = {
+          enableHighAccuracy: true,
+          maximumAge: 0
+        };
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        function preprocessImage(image){
+            let tensor = tf.browser.fromPixels(image);
+            return tensor;
+        }
+
+        function captureWebcam() {
+            var canvas    = document.createElement("canvas");
+            var context   = canvas.getContext('2d');
+            canvas.width  = video.width;
+            canvas.height = video.height;
+
+            context.drawImage(video, 0, 0, video.width, video.height);
+            tensor_image = preprocessImage(canvas);
+
+            return tensor_image;
+        }
+
+        // var children = [];
+        // const liveView = document.getElementById('main-stream-video');
+
+        async function predict() {
+            let tensor = captureWebcam();
+
+            // const options = {score: 0.5, iou: 0.5, topk: 20};
+            const predictions = await model.detect(tensor);
+            // Remove any highlighting we did previous frame.
+            // for (let i = 0; i < children.length; i++) {
+            //   liveView.removeChild(children[i]);
+            // }
+            // children.splice(0);
+
+            for (let prediction of predictions) {
+
+                // console.log(prediction.score);
+                // if (prediction.score > 0.70) {
+                //     console.log(prediction.box);
+                //
+                // }
+
+                console.log(prediction);
+
+
+
+                if (prediction.score > 0.70 && executed) {
+
+                  // ADD MODELS AFTER MARKER FOUND
+                  //navigator.geolocation.getCurrentPosition(function(position) {
+
+                     // const newCoordinates = JSON.stringify({
+                     //   lat: position.coords.latitude,
+                     //   lng: position.coords.longitude
+                     // });
+					  
+                      // console.log('stringified coordinates', newCoordinates);
+                      // localStorage.setItem('coords', newCoordinates);
+
+
+                      // CREATE
+                      var body = document.querySelector('a-scene');
+
+                      var yashagaike = document.createElement('a-entity');
+
+                     
+                      //spiral.setAttribute('obj-model', {
+                      //  obj: '#spiral-obj',
+                      //  mtl: '#spiral-mtl'
+                      //});
+                       yashagaike.setAttribute('gltf-model', '#yashagaike');
+
+                      yashagaike.object3D.position.set(0, 0, 0);
+                      yashagaike.object3D.scale.set(1, 1, 1);
+                      yashagaike.object3D.rotation.set(0, 0, 0);
+
+                      yashagaike.setAttribute('animation-mixer', '');
+
+                      //yashagaike.setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude}`);
+					  
+					  yashagaike.setAttribute('hide-in-ar-mode','');
+
+                      body.appendChild(yashagaike);
+
+
+                      
+
+                      console.log('successfully show AR on marker with xr once');
+
+                   // }, error, optionsNewcoord);
+
+                  executed = false;
+
+                  clearInterval(myInterval);
+                 
+
+
+                }
+                else {
+                  console.log("test: ",prediction.score);
+                }
+            }
+           
+        }
+
+        tf.automl.loadObjectDetection('https://raw.githubusercontent.com/simplephi/ar-sculpture/main/src/hit-test/model/model.json').then(function (loadedModel) {
+            model = loadedModel;
+
+            video = $('#main-stream-video').get(0);
+
+            console.log(video);
+            vendorUrl = window.URL || window.webkitURL;
+
+            return navigator.mediaDevices.getUserMedia({
+                // video:true,
+                video: {
+                  facingMode: {
+                    exact: 'environment'
+                  },
+                  zoom: true,
+
+                },
+                audio: false
+            }).then(function(stream) {
+                localStream = stream;
+                video.srcObject = stream;
+                video.play();
+                myInterval = setInterval(predict, 1000/10);
+            }).catch(function(error) {
+                alert("Something wrong with webcam!");
+            });
+        });
+    </script>
+
+
+</body>
+</html>
