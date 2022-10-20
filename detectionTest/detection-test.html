@@ -9,8 +9,28 @@
 <body>
     <!-- 切り替えボタン -->
     <img src="template.png" id="template" style="width: 100%; display: hidden;">
-    <video id="player" controls playsinline muted autoplay style="width: 100%;"></video>
+    <!--video id="player" controls playsinline muted autoplay style="width: 100%;"></video-->
     <canvas id="canvas" style="width: 100%;"></canvas>
+
+    <a-scene webxr="requiredFeatures: hit-test,local-floor;" ar-hit-test="target:#myobject;"   vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
+        <!-- Model -->
+        <a-assets>
+          <a-asset-item id="yashagaike"
+                        src="yashagaike.gltf"
+                        response-type="arraybuffer"></a-asset-item>
+  
+  
+      </a-assets>
+  
+        <!--a-camera gps-camera rotation-reader-->
+        <a-camera rotation-reader >
+          <video id="main-stream-video" width="480" height="360" >
+  
+          </video>
+        </a-camera>
+  
+  
+      </a-scene>
 
     <script async src=opencv.js onload="onOpenCvReady()"></script>
     <script>
