@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+</head>
+
+<body>
+    <!-- 切り替えボタン -->
+    <img src="template.png" id="template" style="width: 100%; display: hidden;">
+    <video id="player" controls playsinline muted autoplay style="width: 100%;"></video>
+    <canvas id="canvas" style="width: 100%;"></canvas>
+
+    <script async src=opencv.js onload="onOpenCvReady()"></script>
+    <script>
+        const player = document.getElementById('player');
+        let src = null;
+        let dst = null;
+        let cap = null;
+        let isCvLoaded = false
+
+        function onOpenCvReady() {
+            // OpenCV.jsのロードが終わったら呼ばれる
+            if (cv.getBuildInformation)
+            {
+                console.log(cv.getBuildInformation());
+                onloadCallback();
+            }
+            else
+            {
+                // WASM
+                cv['onRuntimeInitialized']=()=>{
+                    console.log(cv.getBuildInformation());
+                    onloadCallback();
+                }
+            }
+        };
+
+        function onloadCallback() {
+            // OpenCV.jsのロード完了
+            isCvLoaded = true;
+        };
+
+        const constraints = {
+            video: {
+                facingMode: { extract: "environment" }
+            },
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+                player.srcObject = stream;
+                player.addEventListener('canplay', onVideoCanPlay, false);
+            });
+
+        function onVideoCanPlay() {
+            // ビデオ再生が可能になった
+            player.width = player.videoWidth // width, heightを設定しないとcap.read(src)で失敗する。
+            player.height = player.videoHeight
+            setTimeout(processVideo, 100);
+        };
+
+        const FPS = 30;
+
+        function processVideo() {
+                if(!isCvLoaded){
+                    setTimeout(processVideo, 100);
+                    return;
+                } else if(cap==null){
+                    // OpenCVのロードが終わり、Videoのフレームがくるのを待つ
+                    cap = new cv.VideoCapture(player);
+                }
+                let begin = Date.now();
+    
+                // start processing.
+                src = new cv.Mat(player.height, player.width, cv.CV_8UC4);
+                dst = new cv.Mat();
+                var template = new cv.imread("template");
+                cap.read(src);
+
+                let im1Gray = new cv.Mat();
+                let im2Gray = new cv.Mat();
+                cv.cvtColor(src, im1Gray, cv.COLOR_BGRA2GRAY);
+                cv.cvtColor(template, im2Gray, cv.COLOR_BGRA2GRAY);
+
+                const orb = new cv.ORB(1000);
+
+                let keypoints1 = new cv.KeyPointVector();
+                let descriptors1 = new cv.Mat();
+                orb.detectAndCompute(im1Gray, new cv.Mat(), keypoints1, descriptors1);
+
+                let keypoints2 = new cv.KeyPointVector();
+                let descriptors2 = new cv.Mat();
+                orb.detectAndCompute(im2Gray, new cv.Mat(), keypoints2, descriptors2);
+
+                const knnDistance_option = 0.71;
+
+                let good_matches = new cv.DMatchVector();
+                let bf = new cv.BFMatcher();
+                let matches = new cv.DMatchVectorVector();
+                bf.knnMatch(descriptors1, descriptors2, matches, 2);
+                let counter = 0;
+                for (let i = 0; i < matches.size(); ++i) {
+                    let match = matches.get(i);
+                    let dMatch1 = match.get(0);
+                    let dMatch2 = match.get(1);
+                    if (dMatch1.distance <= dMatch2.distance * parseFloat(knnDistance_option)) {
+                        good_matches.push_back(dMatch1);
+                        counter++;
+                    }
+                }
+
+                console.log("keeping ", counter, " points in good_matches vector out of ", matches.size(), " contained in this match vector:", matches);
+                console.log("here are first 5 matches");
+                for (let t = 0; t < matches.size(); ++t) {
+                    console.log("[" + t + "]", "matches: ", matches.get(t));
+                    if (t === 5){break;}
+                }
+                
+                console.log("here are first 5 good_matches");
+                for (let r = 0; r < good_matches.size(); ++r) {
+                    console.log("[" + r + "]", "good_matches: ", good_matches.get(r));
+                    if (r === 5){break;}
+                }
+
+
+                cv.drawKeypoints(src, keypoints1, dst, [255, 255, 255, 255]);
+                let imMatches = new cv.Mat();
+                let color = new cv.Scalar(0, 255, 0, 255);
+                cv.drawMatches(src, keypoints1, template, keypoints2, good_matches, dst, color);
+
+                cv.imshow('canvas', dst);
+                src.delete();
+                dst.delete();
+    
+                // schedule the next one.
+                let delay = 1000/FPS - (Date.now() - begin);
+                setTimeout(processVideo, delay);
+            return;
+        };
+    </script>
+</body>
+
+</html>
