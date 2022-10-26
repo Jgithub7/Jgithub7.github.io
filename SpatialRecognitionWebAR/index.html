@@ -150,7 +150,8 @@
 
             const knnDistance_option = 0.71;
 
-            let good_matches = new cv.DMatchVector();
+            //Feature Matching
+            let good_matches = new cv.DMatchVector(); //matching keypoint descriptors
             let bf = new cv.BFMatcher();
             let matches = new cv.DMatchVectorVector();
             bf.knnMatch(descriptors1, descriptors2, matches, 2);
@@ -165,7 +166,7 @@
                 }
             }
 
-            var ua = window.navigator.userAgent.toLowerCase();
+            var ua = window.navigator.userAgent.toLowerCase(); //return information about the browser name, version and platform
             
             function sleep(waitSec, callbackFunc) {
 
