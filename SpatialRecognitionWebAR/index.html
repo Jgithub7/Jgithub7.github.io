@@ -48,27 +48,30 @@
         let dst = null;
         let cap = null;
         let isCvLoaded = false
-        let orb = null;
+        let orb = null; //(oriented BRIEF) keypoint detector and descriptor extractor - detect stable keypoints, selects the strongest features
         let template = null;
         let im2Gray = null;
         let keypoints2 = null;
         let descriptors2 = null;
 
         navigator.mediaDevices.getUserMedia({
-            video: true,
+            //constraints
+            video: true, // media type
             audio: false
         }).then(function(stream) {
+            //returns the object which serves as the source of the media
             video.srcObject = stream;
+
             video.play();
         }).catch(function(error) {
             alert("Something wrong with webcam!");
         });
 
         function onOpenCvReady() {
-            // OpenCV.jsのロードが終わったら呼ばれる
+            // OpenCV.Called when js is loaded
             if (cv.getBuildInformation)
             {
-                console.log(cv.getBuildInformation());
+                console.log(cv.getBuildInformation()); //Check openCV build setting
                 onloadCallback();
             }
             else
@@ -82,13 +85,15 @@
         };
 
         function onloadCallback() {
-            // OpenCV.jsのロード完了
-            orb = new cv.ORB(1000);
-            template = new cv.imread("template");
-            im2Gray = new cv.Mat();
-            cv.cvtColor(template, im2Gray, cv.COLOR_BGRA2GRAY);
-            keypoints2 = new cv.KeyPointVector();
+            // OpenCV.jsのロード完了 OpenCV.js load complete
+            orb = new cv.ORB(1000); //(oriented BRIEF) keypoint detector and descriptor extractor - detect stable keypoints, selects the strongest features
+            template = new cv.imread("template"); //loads an image (marker here) from the specified file
+            im2Gray = new cv.Mat(); //store image as two numerical dimensional matrices
+            cv.cvtColor(template, im2Gray, cv.COLOR_BGRA2GRAY); // convert image color into Grayscale color
+            keypoints2 = new cv.KeyPointVector(); 
             descriptors2 = new cv.Mat();
+
+            //detect the keypoints and compute the descriptors for the query image and train image
             orb.detectAndCompute(im2Gray, new cv.Mat(), keypoints2, descriptors2);
 
             setVisible('.loading', false);
@@ -99,10 +104,10 @@
             vendorUrl = window.URL || window.webkitURL;
 
             isCvLoaded = true;
-            myInterval = setInterval(predict, 1000/10);
+            myInterval = setInterval(predict, 1000/10); //set a delay for functions executed again and again
         };
 
-        function setVisible(selector, visible) {
+        function setVisible(selector, visible) { 
           document.querySelector(selector).style.display = visible ? 'block' : 'none';
         }
 
