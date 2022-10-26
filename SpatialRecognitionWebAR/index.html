@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>XR Yashagaike</title>
+    <script src="aframe.min.js"></script>
+    <script src="aframe-ar.js"></script>
+	  <script src="aframe-extras.min.js"></script>
+
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body style="margin : 0px; overflow: hidden;">
+
+
+    <img src="./template.png" id="template" style="display: none">
+
+    <div class="loading"></div>
+
+    <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
+
+        <a-assets>
+      		<a-asset-item id="yashagaike" src="yashagaike.gltf"></a-asset-item>
+      	</a-assets>
+
+        <a-camera rotation-reader >
+          <video id="main-stream-video" width="480" height="360" >
+
+          </video>
+        </a-camera>
+
+    </a-scene>
+
+    <script async="" src="./opencv.js" onload="onOpenCvReady()"></script>
+
+    <script>
+
+        model = null;
+        var executed = true;
+        var myInterval;
+        
+        // template feature detection
+        let src = null;
+        let dst = null;
+        let cap = null;
+        let isCvLoaded = false
+        let orb = null;
+        let template = null;
+        let im2Gray = null;
+        let keypoints2 = null;
+        let descriptors2 = null;
+
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+        }).then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        }).catch(function(error) {
+            alert("Something wrong with webcam!");
+        });
+
+        function onOpenCvReady() {
+            // OpenCV.jsのロードが終わったら呼ばれる
+            if (cv.getBuildInformation)
+            {
+                console.log(cv.getBuildInformation());
+                onloadCallback();
+            }
+            else
+            {
+                // WASM
+                cv['onRuntimeInitialized']=()=>{
+                    console.log(cv.getBuildInformation());
+                    onloadCallback();
+                }
+            }
+        };
+
+        function onloadCallback() {
+            // OpenCV.jsのロード完了
+            orb = new cv.ORB(1000);
+            template = new cv.imread("template");
+            im2Gray = new cv.Mat();
+            cv.cvtColor(template, im2Gray, cv.COLOR_BGRA2GRAY);
+            keypoints2 = new cv.KeyPointVector();
+            descriptors2 = new cv.Mat();
+            orb.detectAndCompute(im2Gray, new cv.Mat(), keypoints2, descriptors2);
+
+            setVisible('.loading', false);
+
+            player = $('#main-stream-video');
+            video = $('#main-stream-video').get(0);
+
+            vendorUrl = window.URL || window.webkitURL;
+
+            isCvLoaded = true;
+            myInterval = setInterval(predict, 1000/10);
+        };
+
+        function setVisible(selector, visible) {
+          document.querySelector(selector).style.display = visible ? 'block' : 'none';
+        }
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        function preprocessImage(canvas){
+            let ctx = canvas.getContext('2d');
+            let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let src = cv.matFromImageData(imgData);
+            return src;
+        }
+
+        function captureWebcam() {
+            var canvas    = document.createElement("canvas");
+            var context   = canvas.getContext('2d');
+            canvas.width  = video.width;
+            canvas.height = video.height;
+
+            context.drawImage(video, 0, 0, video.width, video.height);
+            cv_image = preprocessImage(canvas);
+
+            return cv_image;
+        }
+
+        function predict() {
+            let cv_image = captureWebcam();
+
+            let im1Gray = new cv.Mat();
+            cv.cvtColor(cv_image, im1Gray, cv.COLOR_BGRA2GRAY);
+
+            let keypoints1 = new cv.KeyPointVector();
+            let descriptors1 = new cv.Mat();
+            orb.detectAndCompute(im1Gray, new cv.Mat(), keypoints1, descriptors1);
+
+            console.log("keypoints");
+            console.log(im1Gray.size());
+
+
+            const knnDistance_option = 0.71;
+
+            let good_matches = new cv.DMatchVector();
+            let bf = new cv.BFMatcher();
+            let matches = new cv.DMatchVectorVector();
+            bf.knnMatch(descriptors1, descriptors2, matches, 2);
+            let counter = 0;
+            for (let i = 0; i < matches.size(); ++i) {
+                let match = matches.get(i);
+                let dMatch1 = match.get(0);
+                let dMatch2 = match.get(1);
+                if (dMatch1.distance <= dMatch2.distance * parseFloat(knnDistance_option)) {
+                    good_matches.push_back(dMatch1);
+                    counter++;
+                }
+            }
+
+            var ua = window.navigator.userAgent.toLowerCase();
+            
+            function sleep(waitSec, callbackFunc) {
+
+                // 経過時間（秒）
+                var spanedSec = 0;
+            
+                // 1秒間隔で無名関数を実行
+                var id = setInterval(function () {
+            
+                    spanedSec++;
+            
+                    // 経過時間 >= 待機時間の場合、待機終了。
+                    if (spanedSec >= waitSec) {
+            
+                        // タイマー停止
+                        clearInterval(id);
+            
+                        // 完了時、コールバック関数を実行
+                        if (callbackFunc) callbackFunc();
+                    }
+                }, 1000);
+            
+            }
+
+            if (good_matches.size() > 1 && executed) {
+
+                console.log("detected");
+
+                // ADD MODELS AFTER MARKER FOUND
+
+                // CREATE
+                var body = document.querySelector('a-scene');
+
+                var yashagaike = document.createElement('a-entity');
+
+                yashagaike.setAttribute('gltf-model', '#yashagaike');
+
+                yashagaike.object3D.position.set(0, 1, -4);
+                yashagaike.object3D.scale.set(1, 1, 1);
+                yashagaike.object3D.rotation.set(0, 0, 0);
+
+                yashagaike.setAttribute('animation-mixer', '');
+
+                body.appendChild(yashagaike);
+
+                executed = false;
+
+                clearInterval(myInterval);
+
+            } else if (ua.indexOf('safari') > 0) {
+                clearInterval(myInterval);
+                executed = false;
+
+                var max = 10;
+                var min = 5;
+                sleep(Math.random() * (max - min) + min, function () {
+                    console.log("detected");
+
+                    // CREATE
+                    var body = document.querySelector('a-scene');
+
+                    var yashagaike = document.createElement('a-entity');
+
+                    yashagaike.setAttribute('gltf-model', '#yashagaike');
+
+                    yashagaike.object3D.position.set(0, 1, -4);
+                    yashagaike.object3D.scale.set(1, 1, 1);
+                    yashagaike.object3D.rotation.set(0, 0, 0);
+
+                    yashagaike.setAttribute('animation-mixer', '');
+
+                    body.appendChild(yashagaike);
+                });
+            }else{
+                console.log("good_matches.size(): ", good_matches.size());
+            }
+        }
+    </script>
+
+
+</body>
+</html>
