@@ -27,6 +27,12 @@
       		<a-asset-item id="yashagaike" src="yashagaike.gltf"></a-asset-item>
       	</a-assets>
 
+          <a-assets>
+            <audio id="yashagaikeSound" src="./yashagaike_type2.wav"></audio>
+          </a-assets>
+          
+            <a-entity sound="src: #yashagaikeSound; volume: 10; loop: true"></a-entity>
+
         <a-camera rotation-reader >
           <video id="main-stream-video" width="480" height="360" >
 
@@ -210,6 +216,9 @@
 
                 yashagaike.setAttribute('animation-mixer', '');
 
+                var entity = document.querySelector('[sound]');
+                entity.components.sound.playSound();
+
                 body.appendChild(yashagaike);
 
                 executed = false;
@@ -237,6 +246,9 @@
                     yashagaike.object3D.rotation.set(0, 0, 0);
 
                     yashagaike.setAttribute('animation-mixer', '');
+
+                    var entity = document.querySelector('[sound]');
+                    entity.components.sound.playSound();
 
                     body.appendChild(yashagaike);
                 });
