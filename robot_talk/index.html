@@ -38,6 +38,8 @@
 </body>
 
 <script>
+
+  var markerFound = false;
 //Detect marker found and lost
 AFRAME.registerComponent('registerevents', {
 		init: function () {
@@ -45,6 +47,13 @@ AFRAME.registerComponent('registerevents', {
 
 			marker.addEventListener("markerFound", ()=> {
 
+        markerFound = true;
+        console.log('Marker found');
+
+			});
+
+      if (markerFound) 
+      {
           // CREATE
           var body = document.querySelector('a-scene');
 
@@ -62,16 +71,13 @@ AFRAME.registerComponent('registerevents', {
           entity.components.sound.playSound();
 
           body.appendChild(robot);
-/*
+          /*
           var sceneEl = document.querySelector('a-entity');
           sceneEl.setAttribute('animation-mixer', '');
 
           var entity = document.querySelector('[sound]');
-          entity.components.sound.playSound();*/
-
-        console.log('Marker found');
-
-			});
+          entity.components.sound.playSound();*/ 
+      }
 /*
 			marker.addEventListener("markerLost",() =>{
 
