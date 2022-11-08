@@ -17,21 +17,21 @@
 <body style="margin : 0px; overflow: hidden;">
 
 
-    <img src="./robot_talk2.png" id="template" style="display: none">
+    <img src="./template.png" id="template" style="display: none">
 
     <div class="loading"></div>
 
     <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
 
         <a-assets>
-      		<a-asset-item id="robot" src="robotTalkingIntroloop.gltf"></a-asset-item>
+      		<a-asset-item id="robot" src="./robotTalkingIntroloop.gltf"></a-asset-item>
       	</a-assets>
 
           <a-assets>
             <audio id="robotSound" src="./intro_english.mp3"></audio>
           </a-assets>
           
-            <a-entity sound="src: #robotSound; loop: true"></a-entity>
+            <a-entity sound="src: #robotSound; volume: 10; loop: true"></a-entity>
 
         <a-camera rotation-reader >
           <video id="main-stream-video" width="480" height="360" >
