@@ -22,8 +22,9 @@
     </a-assets>
 
     <a-marker registerevents type="pattern" url="./robot_talk2.patt" >
-      <a-entity position="0 0 0" rotation="0 0 0" scale="0.001 0.001 0.001" gltf-model="#marsrobot" sound="src: #MarsRobotSound; volume: 10; loop: true" >
-      </a-entity>
+      <!--a-entity position="0 0 0" rotation="0 0 0" scale="0.001 0.001 0.001" gltf-model="#marsrobot" sound="src: #MarsRobotSound; volume: 10; loop: true" >
+      </a-entity-->
+      <a-entity sound="src: #yashagaikeSound; loop: true"></a-entity>
     </a-marker>
 
     <a-assets>
@@ -44,11 +45,29 @@ AFRAME.registerComponent('registerevents', {
 
 			marker.addEventListener("markerFound", ()=> {
 
+          // CREATE
+          var body = document.querySelector('a-scene');
+
+          var robot = document.createElement('a-entity');
+
+          robot.setAttribute('gltf-model', '#yashagaike');
+
+          robot.object3D.position.set(0, 0, 0);
+          robot.object3D.scale.set(0.001, 0.001, 0.001);
+          robot.object3D.rotation.set(0, 0, 0);
+
+          robot.setAttribute('animation-mixer', '');
+
+          var entity = document.querySelector('[sound]');
+          entity.components.sound.playSound();
+
+          body.appendChild(robot);
+/*
           var sceneEl = document.querySelector('a-entity');
           sceneEl.setAttribute('animation-mixer', '');
 
           var entity = document.querySelector('[sound]');
-          entity.components.sound.playSound();
+          entity.components.sound.playSound();*/
 
         console.log('Marker found');
 
