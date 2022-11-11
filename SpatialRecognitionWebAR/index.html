@@ -248,11 +248,22 @@
 
                     yashagaike.setAttribute('gltf-model', '#yashagaike');
 
-                    yashagaike.object3D.position.set(0, 1, -4);
+                    yashagaike.object3D.position.set(0, 0, 0);
                     yashagaike.object3D.scale.set(1, 1, 1);
                     yashagaike.object3D.rotation.set(0, 0, 0);
 
-                    yashagaike.setAttribute('animation-mixer', '');
+                    //yashagaike.setAttribute('animation-mixer', '');
+                    yashagaike.setAttribute('animation-mixer', {
+                        'startFrame': 2000,
+                        'duration' : 2
+                    });
+
+                    yashagaike.setAttribute('sound', {
+                        'src': '#yashagaike_sound',
+                        'volume': 10,
+                        'autoplay': true,
+                        'loop': true
+                        }, true);
 
                     //var entity = document.querySelector('[sound]');
                     //entity.components.sound.playSound();
