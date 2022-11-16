@@ -65,6 +65,7 @@
         let im2Gray = null;
         let keypoints2 = null;
         let descriptors2 = null;
+        var randomInt = getRndInteger(1, 3);
 
         navigator.mediaDevices.getUserMedia({
             //constraints
@@ -213,7 +214,7 @@
 
                 var yashagaike = document.createElement('a-entity');
 
-                yashagaike.setAttribute('gltf-model', '#yashagaike'+2);
+                yashagaike.setAttribute('gltf-model', '#yashagaike'+randomInt);
 
                 yashagaike.object3D.position.set(0, 1, -4);
                 yashagaike.object3D.scale.set(1, 1, 1);
@@ -229,6 +230,8 @@
                     }, true);
 
                 body.appendChild(yashagaike);
+
+                randomInt = getRndInteger(1, 3);
 
                 executed = false;
 
@@ -248,7 +251,7 @@
 
                     var yashagaike = document.createElement('a-entity');
 
-                    yashagaike.setAttribute('gltf-model', '#yashagaike'+2);
+                    yashagaike.setAttribute('gltf-model', '#yashagaike'+randomInt);
 
                     yashagaike.object3D.position.set(0, 1,-4);
                     yashagaike.object3D.scale.set(1, 1, 1);
@@ -257,7 +260,7 @@
                     yashagaike.setAttribute('animation-mixer', '');
 
                     yashagaike.setAttribute('sound', {
-                        'src': '#yashagaike_sound'+2,
+                        'src': '#yashagaike_sound'+randomInt,
                         'volume': 10,
                         'autoplay': true,
                         'loop': true
@@ -267,6 +270,7 @@
                     //entity.components.sound.playSound();
 
                     body.appendChild(yashagaike);
+                    randomInt = getRndInteger(1, 3);
                 });
             }else{
                 console.log("good_matches.size(): ", good_matches.size());
