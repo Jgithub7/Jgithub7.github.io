@@ -234,11 +234,11 @@
 
                 randomInt = Math.floor(Math.random() * 3) + 1;
 
-                executed = false;
+                //executed = false;
 
                 clearInterval(myInterval);
 
-            } else if (ua.indexOf('safari') > 0) {
+            } /*else if (ua.indexOf('safari') > 0) {
                 clearInterval(myInterval);
                 executed = false;
 
@@ -269,13 +269,11 @@
                         'loop': true
                         }, true);
 
-                    //var entity = document.querySelector('[sound]');
-                    //entity.components.sound.playSound();
-
                     body.appendChild(yashagaike);
                     randomInt = Math.floor(Math.random() * 3) + 1;
                 });
-            }else{
+            }*/
+            else{
                 console.log("good_matches.size(): ", good_matches.size());
             }
         }
