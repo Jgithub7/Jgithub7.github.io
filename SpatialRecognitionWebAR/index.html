@@ -24,12 +24,18 @@
     <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
 
         <a-assets>
-      		<a-asset-item id="yashagaike" src="yashagaike.gltf"></a-asset-item>
+      		<a-asset-item id="yashagaike1" src="yashagaike1.gltf"></a-asset-item>
+            <a-asset-item id="yashagaike2" src="yashagaike2.gltf"></a-asset-item>
+            <a-asset-item id="yashagaike3" src="yashagaike3.gltf"></a-asset-item>
       	</a-assets>
 
           <a-assets>
-            <audio id="yashagaikeSound" src="./yashagaike_sound.wav" preload="auto"></audio>
+            <audio id="yashagaikeSound1" src="./yashagaike_sound1.wav"></audio>
+            <audio id="yashagaikeSound2" src="./yashagaike_sound2.wav"></audio>
+            <audio id="yashagaikeSound3" src="./yashagaike_sound3.wav"></audio>
           </a-assets>
+
+          <!--a-entity id="animation"></a-entity-->
           
             <!--a-entity sound="src: #yashagaikeSound; loop: true"></a-entity-->
 
@@ -207,20 +213,16 @@
 
                 var yashagaike = document.createElement('a-entity');
 
-                yashagaike.setAttribute('gltf-model', '#yashagaike');
+                yashagaike.setAttribute('gltf-model', '#yashagaike'+2);
 
                 yashagaike.object3D.position.set(0, 0, 0);
                 yashagaike.object3D.scale.set(1, 1, 1);
                 yashagaike.object3D.rotation.set(0, 0, 0);
 
-                //yashagaike.setAttribute('animation-mixer', '');
-                yashagaike.setAttribute('animation-mixer', {
-                    'startFrame': 2000,
-                    'duration' : 2
-                });
+                yashagaike.setAttribute('animation-mixer', '');
 
                 yashagaike.setAttribute('sound', {
-                      'src': '#yashagaike_sound',
+                      'src': '#yashagaike_sound'+2,
                       'volume': 10,
                       'autoplay': true,
                       'loop': true
