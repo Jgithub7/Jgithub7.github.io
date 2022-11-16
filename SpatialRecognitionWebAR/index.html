@@ -83,14 +83,14 @@
             // OpenCV.Called when js is loaded
             if (cv.getBuildInformation)
             {
-                console.log(cv.getBuildInformation()); //Check openCV build setting
+                //console.log(cv.getBuildInformation()); //Check openCV build setting
                 onloadCallback();
             }
             else
             {
                 // WASM
                 cv['onRuntimeInitialized']=()=>{
-                    console.log(cv.getBuildInformation());
+                    //console.log(cv.getBuildInformation());
                     onloadCallback();
                 }
             }
@@ -245,7 +245,9 @@
                 var max = 10;
                 var min = 5;
                 sleep(Math.random() * (max - min) + min, function () {
+                    
                     console.log("detected");
+                    console.log("Number:", randomInt);
 
                     // CREATE
                     var body = document.querySelector('a-scene');
