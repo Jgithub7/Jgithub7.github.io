@@ -24,15 +24,11 @@
     <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
 
         <a-assets>
-      		<a-asset-item id="yashagaike1" src="yashagaike1.gltf"></a-asset-item>
-            <a-asset-item id="yashagaike2" src="yashagaike2.gltf"></a-asset-item>
-            <a-asset-item id="yashagaike3" src="yashagaike3.gltf"></a-asset-item>
+      		<a-asset-item id="yashagaike" src="yashagaike.gltf"></a-asset-item>
       	</a-assets>
 
           <a-assets>
             <audio id="yashagaike_sound1" src="yashagaike_sound1.wav" preload="auto"></audio>
-            <audio id="yashagaike_sound2" src="yashagaike_sound2.wav" preload="auto"></audio>
-            <audio id="yashagaike_sound3" src="yashagaike_sound3.wav" preload="auto"></audio>
           </a-assets>
 
           <!--a-entity id="animation"></a-entity-->
@@ -65,8 +61,8 @@
         let im2Gray = null;
         let keypoints2 = null;
         let descriptors2 = null;
-        var randomInt = Math.floor(Math.random() * 3) + 1;
-        var previousNum = randomInt;
+        //var randomInt = Math.floor(Math.random() * 3) + 1;
+        //var previousNum = randomInt;
 
         navigator.mediaDevices.getUserMedia({
             //constraints
@@ -207,7 +203,6 @@
             if (good_matches.size() > 1 && executed) {
 
                 console.log("detected");
-                console.log("Number:", randomInt);
                 console.log("good_matches.size(): ", good_matches.size());
 
                 // ADD MODELS AFTER MARKER FOUND
@@ -217,7 +212,7 @@
 
                 var yashagaike = document.createElement('a-entity');
 
-                yashagaike.setAttribute('gltf-model', '#yashagaike'+randomInt);
+                yashagaike.setAttribute('gltf-model', '#yashagaike');
 
                 yashagaike.object3D.position.set(0, 1, -4);
                 yashagaike.object3D.scale.set(1, 1, 1);
@@ -226,22 +221,13 @@
                 yashagaike.setAttribute('animation-mixer', '');
 
                 yashagaike.setAttribute('sound', {
-                      'src': '#yashagaike_sound'+2,
+                      'src': '#yashagaike_sound1',
                       'volume': 10,
                       'autoplay': true,
                       'loop': true
                     }, true);
 
                 body.appendChild(yashagaike);
-
-                randomInt = Math.floor(Math.random() * 3) + 1;
-
-                while(randomInt == previousNum) 
-                {
-                    randomInt = Math.floor(Math.random() * 3) + 1;
-                }
-
-                previousNum = randomInt;
 
                 //executed = false;
 
@@ -256,7 +242,6 @@
                 sleep(Math.random() * (max - min) + min, function () {
                     
                     console.log("detected");
-                    console.log("Number:", randomInt);
                     console.log("good_matches.size(): ", good_matches.size());
 
                     // CREATE
@@ -264,7 +249,7 @@
 
                     var yashagaike = document.createElement('a-entity');
 
-                    yashagaike.setAttribute('gltf-model', '#yashagaike'+randomInt);
+                    yashagaike.setAttribute('gltf-model', '#yashagaike');
 
                     yashagaike.object3D.position.set(0, 1,-4);
                     yashagaike.object3D.scale.set(1, 1, 1);
@@ -273,21 +258,13 @@
                     yashagaike.setAttribute('animation-mixer', '');
 
                     yashagaike.setAttribute('sound', {
-                        'src': '#yashagaike_sound'+randomInt,
+                        'src': '#yashagaike_sound1',
                         'volume': 10,
                         'autoplay': true,
                         'loop': true
                         }, true);
 
                     body.appendChild(yashagaike);
-                    randomInt = Math.floor(Math.random() * 3) + 1;
-
-                    while(randomInt == previousNum) 
-                    {
-                        randomInt = Math.floor(Math.random() * 3) + 1;
-                    }
-
-                    previousNum = randomInt;
                 });
             }
             else{
