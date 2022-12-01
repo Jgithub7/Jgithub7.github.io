@@ -236,6 +236,13 @@
 
                 randomInt = Math.floor(Math.random() * 3) + 1;
 
+                while(randomInt == previousNum) 
+                {
+                    randomInt = Math.floor(Math.random() * 3) + 1;
+                }
+
+                previousNum = randomInt;
+
                 //executed = false;
 
                 clearInterval(myInterval);
