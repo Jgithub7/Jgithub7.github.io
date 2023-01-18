@@ -17,17 +17,17 @@
 
   <a-scene embedded arjs vr-mode-ui="enabled: false">
 
-
     <a-assets>
-      <a-asset-item id="monster" src="monster.gltf"></a-asset-item>
+      <a-asset-item id="osakaAnimation" src="./monster.gltf"></a-asset-item>
     </a-assets>
 
-    <a-marker registerevents type="pattern" url="osakaexpoQR.patt" >
-      <a-entity position="0 0 0" rotation="0 0 0" scale="6 6 6" gltf-model="#monster">
+    <a-marker registerevents type="pattern" url="./pattern-keepon2.patt" >
+      <a-entity position="0 0 0" rotation="0 0 0" scale="6 6 6" gltf-model="#osakaAnimation">
       </a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
+
   </a-scene>
 
 
@@ -41,10 +41,10 @@ AFRAME.registerComponent('registerevents', {
 
 			marker.addEventListener("markerFound", ()=> {
 
-        var sceneEl = document.querySelector('a-entity');
-        sceneEl.setAttribute('animation-mixer', '');
+          var sceneEl = document.querySelector('a-entity');
+          sceneEl.setAttribute('animation-mixer', '');
 
-        console.log('Marker found');
+          console.log('Marker Found');
 
 			});
 
@@ -53,12 +53,11 @@ AFRAME.registerComponent('registerevents', {
         var sceneEl = document.querySelector('a-entity');
         sceneEl.removeAttribute('animation-mixer');
 
-				console.log('Marker Lost ');
+				console.log('Marker Lost');
 			});
 		},
 	});
 
 </script>
-
 
 </html>
