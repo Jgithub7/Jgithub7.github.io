@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>XR monster</title>
+    <script src="aframe.min.js"></script>
+    <script src="aframe-ar.js"></script>
+	  <script src="aframe-extras.min.js"></script>
+
+    <script src="jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body style="margin : 0px; overflow: hidden;">
+
+
+    <img src="./template.png" id="template" style="display: none">
+
+    <div class="loading"></div>
+
+    <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
+
+        <a-assets>
+      		<a-asset-item id="monster" src="monster.gltf"></a-asset-item>
+      	</a-assets>
+
+          <!--a-entity id="animation"></a-entity-->
+          
+            <!--a-entity sound="src: #monsterSound; loop: true"></a-entity-->
+
+        <a-camera rotation-reader >
+          <video id="main-stream-video" width="480" height="360" >
+
+          </video>
+        </a-camera>
+
+    </a-scene>
+
+    <script async="" src="./opencv.js" onload="onOpenCvReady()"></script>
+
+    <script type="text/javascript">
+
+        model = null;
+        var executed = true;
+        var myInterval;
+        
+        // template feature detection
+        let src = null;
+        let dst = null;
+        let cap = null;
+        let isCvLoaded = false
+        let orb = null; //(oriented BRIEF) keypoint detector and descriptor extractor - detect stable keypoints, selects the strongest features
+        let template = null;
+        let im2Gray = null;
+        let keypoints2 = null;
+        let descriptors2 = null;
+        //var randomInt = Math.floor(Math.random() * 3) + 1;
+        //var previousNum = randomInt;
+
+        navigator.mediaDevices.getUserMedia({
+            //constraints
+            video: true, // media type
+            audio: false
+        }).then(function(stream) {
+            //returns the object which serves as the source of the media
+            video.srcObject = stream;
+
+            video.play();
+        }).catch(function(error) {
+        });
+
+        function onOpenCvReady() {
+            // OpenCV.Called when js is loaded
+            if (cv.getBuildInformation)
+            {
+                //console.log(cv.getBuildInformation()); //Check openCV build setting
+                onloadCallback();
+            }
+            else
+            {
+                // WASM
+                cv['onRuntimeInitialized']=()=>{
+                    //console.log(cv.getBuildInformation());
+                    onloadCallback();
+                }
+            }
+        };
+
+        function onloadCallback() {
+            // OpenCV.jsのロード完了 OpenCV.js load complete
+            orb = new cv.ORB(1000); //(oriented BRIEF) keypoint detector and descriptor extractor - detect stable keypoints, selects the strongest features
+            template = new cv.imread("template"); //loads an image (marker here) from the specified file
+            im2Gray = new cv.Mat(); //store image as two numerical dimensional matrices
+            cv.cvtColor(template, im2Gray, cv.COLOR_BGRA2GRAY); // convert image color into Grayscale color
+            keypoints2 = new cv.KeyPointVector(); 
+            descriptors2 = new cv.Mat();
+
+            //detect the keypoints and compute the descriptors for the query image and train image
+            orb.detectAndCompute(im2Gray, new cv.Mat(), keypoints2, descriptors2);
+
+            setVisible('.loading', false);
+
+            player = $('#main-stream-video');
+            video = $('#main-stream-video').get(0);
+
+            vendorUrl = window.URL || window.webkitURL;
+
+            isCvLoaded = true;
+            myInterval = setInterval(predict, 1000/10); //set a delay for functions executed again and again
+        };
+
+        function setVisible(selector, visible) { 
+          document.querySelector(selector).style.display = visible ? 'block' : 'none';
+        }
+
+        function error(err) {
+          console.warn(`ERROR(${err.code}): ${err.message}`);
+        }
+
+        function preprocessImage(canvas){
+            let ctx = canvas.getContext('2d');
+            let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let src = cv.matFromImageData(imgData);
+            return src;
+        }
+
+        function captureWebcam() {
+            var canvas    = document.createElement("canvas");
+            var context   = canvas.getContext('2d');
+            canvas.width  = video.width;
+            canvas.height = video.height;
+
+            context.drawImage(video, 0, 0, video.width, video.height);
+            cv_image = preprocessImage(canvas);
+
+            return cv_image;
+        }
+
+        function predict() {
+            let cv_image = captureWebcam();
+
+            let im1Gray = new cv.Mat();
+            cv.cvtColor(cv_image, im1Gray, cv.COLOR_BGRA2GRAY);
+
+            let keypoints1 = new cv.KeyPointVector();
+            let descriptors1 = new cv.Mat();
+            orb.detectAndCompute(im1Gray, new cv.Mat(), keypoints1, descriptors1);
+
+            console.log("keypoints");
+            console.log(im1Gray.size());
+
+
+            const knnDistance_option = 0.71;
+
+            //Feature Matching
+            let good_matches = new cv.DMatchVector(); //matching keypoint descriptors
+            let bf = new cv.BFMatcher();
+            let matches = new cv.DMatchVectorVector();
+            bf.knnMatch(descriptors1, descriptors2, matches, 2);
+            let counter = 0;
+            for (let i = 0; i < matches.size(); ++i) {
+                let match = matches.get(i);
+                let dMatch1 = match.get(0);
+                let dMatch2 = match.get(1);
+                if (dMatch1.distance <= dMatch2.distance * parseFloat(knnDistance_option)) {
+                    good_matches.push_back(dMatch1);
+                    counter++;
+                }
+            }
+
+            var ua = window.navigator.userAgent.toLowerCase(); //return information about the browser name, version and platform
+            
+            function sleep(waitSec, callbackFunc) {
+
+                // 経過時間（秒）
+                var spanedSec = 0;
+            
+                // 1秒間隔で無名関数を実行
+                var id = setInterval(function () {
+            
+                    spanedSec++;
+            
+                    // 経過時間 >= 待機時間の場合、待機終了。
+                    if (spanedSec >= waitSec) {
+            
+                        // タイマー停止
+                        clearInterval(id);
+            
+                        // 完了時、コールバック関数を実行
+                        if (callbackFunc) callbackFunc();
+                    }
+                }, 1000);
+            
+            }
+
+            if (good_matches.size() > 1 && executed) {
+
+                console.log("detected");
+                console.log("good_matches.size(): ", good_matches.size());
+
+                // ADD MODELS AFTER MARKER FOUND
+
+                // CREATE
+                var body = document.querySelector('a-scene');
+
+                var monster = document.createElement('a-entity');
+
+                monster.setAttribute('gltf-model', '#monster');
+
+                monster.object3D.position.set(0, 1, -4);
+                monster.object3D.scale.set(1, 1, 1);
+                monster.object3D.rotation.set(0, 0, 0);
+
+                monster.setAttribute('animation-mixer', '');
+
+                body.appendChild(monster);
+
+                //executed = false;
+
+                clearInterval(myInterval);
+
+            } else if (ua.indexOf('safari') > 0) {
+                clearInterval(myInterval);
+                executed = false;
+
+                var max = 10;
+                var min = 5;
+                sleep(Math.random() * (max - min) + min, function () {
+                    
+                    console.log("detected");
+                    console.log("good_matches.size(): ", good_matches.size());
+
+                    // CREATE
+                    var body = document.querySelector('a-scene');
+
+                    var monster = document.createElement('a-entity');
+
+                    monster.setAttribute('gltf-model', '#monster');
+
+                    monster.object3D.position.set(0, 1,-4);
+                    monster.object3D.scale.set(1, 1, 1);
+                    monster.object3D.rotation.set(0, 0, 0);
+
+                    monster.setAttribute('animation-mixer', '');
+
+                    body.appendChild(monster);
+                });
+            }
+            else{
+                console.log("good_matches.size(): ", good_matches.size());
+            }
+        }
+    </script>
+
+
+</body>
+</html>
