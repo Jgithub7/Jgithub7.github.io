@@ -27,6 +27,9 @@
       		<a-asset-item id="monster" src="monster.gltf"></a-asset-item>
       	</a-assets>
 
+        <a-entity position="0 1 -4" rotation="0 0 0" scale="1 1 1" gltf-model="#monster">
+        </a-entity>
+
           <!--a-entity id="animation"></a-entity-->
           
             <!--a-entity sound="src: #monsterSound; loop: true"></a-entity-->
@@ -203,7 +206,7 @@
 
                 // ADD MODELS AFTER MARKER FOUND
 
-                // CREATE
+                /*/ CREATE
                 var body = document.querySelector('a-scene');
 
                 var monster = document.createElement('a-entity');
@@ -216,9 +219,11 @@
 
                 monster.setAttribute('animation-mixer', '');
 
-                body.appendChild(monster);
+                body.appendChild(monster);*/
 
                 //executed = false;
+                var sceneEl = document.querySelector('a-entity');
+                sceneEl.setAttribute('animation-mixer', '');
 
                 clearInterval(myInterval);
 
@@ -233,7 +238,7 @@
                     console.log("detected");
                     console.log("good_matches.size(): ", good_matches.size());
 
-                    // CREATE
+                    /*/ CREATE
                     var body = document.querySelector('a-scene');
 
                     var monster = document.createElement('a-entity');
@@ -246,7 +251,10 @@
 
                     monster.setAttribute('animation-mixer', '');
 
-                    body.appendChild(monster);
+                    body.appendChild(monster);*/
+                    
+                    var sceneEl = document.querySelector('a-entity');
+                    sceneEl.setAttribute('animation-mixer', '');
                 });
             }
             else{
