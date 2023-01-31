@@ -19,13 +19,14 @@
   <a-scene>
 
     <a-assets>
-      <a-asset-item id="osakaAnimation" src="./monster.gltf"></a-asset-item>
+        <a-asset-item id="target-file" src="target.zpt"/>
+        <a-asset-item id="osakaAnimation" src="./monster.gltf"></a-asset-item>
     </a-assets>
-
-    <a-marker registerevents type="pattern" url="./pattern-osakaexpo.patt" >
-      <a-entity position="0 0 0" rotation="-90 0 0" scale="2 2 2" gltf-model="#osakaAnimation">
-      </a-entity>
-    </a-marker>
+    
+    <a-entity zappar-image="#target-file" id="image-tracker">
+        <a-entity position="0 0 0" rotation="-90 0 0" scale="2 2 2" gltf-model="#osakaAnimation" animation-mixer>
+        </a-entity>
+    </a-entity>
 
     <a-entity camera zappar-camera></a-entity>
   </a-scene>
@@ -34,7 +35,15 @@
 </body>
 
 <script>
+    let imageTracker = document.getElementById("image-tracker");
 
+    imageTracker.addEventListener("zappar-visible", () => {
+    console.log("Image has become visible");
+    });
+
+    imageTracker.addEventListener("zappar-notvisible", () => {
+    console.log("Image is no longer visible");
+    });
 </script>
 
 </html>
