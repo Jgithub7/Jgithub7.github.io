@@ -16,7 +16,7 @@
 
 <body style="margin : 0px; overflow: hidden;">
 
-  <a-scene embedded arjs vr-mode-ui="enabled: false">
+  <a-scene>
 
     <a-assets>
       <a-asset-item id="osakaAnimation" src="./monster.gltf"></a-asset-item>
@@ -27,8 +27,7 @@
       </a-entity>
     </a-marker>
 
-    <a-entity camera></a-entity>
-
+    <a-entity camera zappar-camera></a-entity>
   </a-scene>
 
 
