@@ -24,19 +24,15 @@
     <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
 
         <a-assets>
-      		<a-asset-item id="monster" src="monster.gltf"></a-asset-item>
+      		<a-asset-item id="myakmyak" src="myakmyak.gltf"></a-asset-item>
       	</a-assets>
 
           <a-assets>
             <audio id="myakmyak-voice" src="voice.mp3" preload="auto"></audio>
           </a-assets>
-
-        <a-entity position="0 1 -4" rotation="0 0 0" scale="1 1 1" gltf-model="#monster">
-        </a-entity>
-
           <!--a-entity id="animation"></a-entity-->
           
-            <!--a-entity sound="src: #monsterSound; loop: true"></a-entity-->
+            <!--a-entity sound="src: #myakmyakSound; loop: true"></a-entity-->
 
         <a-camera rotation-reader >
           <video id="main-stream-video" width="480" height="360" >
@@ -210,30 +206,29 @@
 
                 // ADD MODELS AFTER MARKER FOUND
 
-                /*/ CREATE
+                // CREATE
                 var body = document.querySelector('a-scene');
 
-                var monster = document.createElement('a-entity');
+                var myakmyak = document.createElement('a-entity');
 
-                monster.setAttribute('gltf-model', '#monster');
+                myakmyak.setAttribute('gltf-model', '#myakmyak');
 
-                monster.object3D.position.set(0, 1, -4);
-                monster.object3D.scale.set(1, 1, 1);
-                monster.object3D.rotation.set(0, 0, 0);
+                myakmyak.object3D.position.set(0, 1, -4);
+                myakmyak.object3D.scale.set(1, 1, 1);
+                myakmyak.object3D.rotation.set(0, 0, 0);
 
-                monster.setAttribute('animation-mixer', '');
-
-                body.appendChild(monster);*/
+                myakmyak.setAttribute('animation-mixer', '');
 
                 //executed = false;
-                var myakmyak = document.querySelector('a-entity');
-                myakmyak.setAttribute('animation-mixer', '');
+                
                 myakmyak.setAttribute('sound', {
                         'src': '#myakmyak-voice',
                         'volume': 10,
                         'autoplay': true,
                         'loop': true
                         }, true);
+                
+                body.appendChild(myakmyak);
 
                 clearInterval(myInterval);
 
@@ -248,29 +243,27 @@
                     console.log("detected");
                     console.log("good_matches.size(): ", good_matches.size());
 
-                    /*/ CREATE
+                    // CREATE
                     var body = document.querySelector('a-scene');
 
-                    var monster = document.createElement('a-entity');
+                    var myakmyak = document.createElement('a-entity');
 
-                    monster.setAttribute('gltf-model', '#monster');
+                    myakmyak.setAttribute('gltf-model', '#myakmyak');
 
-                    monster.object3D.position.set(0, 1,-4);
-                    monster.object3D.scale.set(1, 1, 1);
-                    monster.object3D.rotation.set(0, 0, 0);
+                    myakmyak.object3D.position.set(0, 1,-4);
+                    myakmyak.object3D.scale.set(1, 1, 1);
+                    myakmyak.object3D.rotation.set(0, 0, 0);
 
-                    monster.setAttribute('animation-mixer', '');
-
-                    body.appendChild(monster);*/
-                    
-                    var myakmyak = document.querySelector('a-entity');
                     myakmyak.setAttribute('animation-mixer', '');
+
                     myakmyak.setAttribute('sound', {
                         'src': '#myakmyak-voice',
                         'volume': 10,
                         'autoplay': true,
                         'loop': true
                         }, true);
+
+                    body.appendChild(myakmyak);
 
                 });
             }
