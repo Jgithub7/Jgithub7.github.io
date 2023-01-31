@@ -27,6 +27,10 @@
       		<a-asset-item id="monster" src="monster.gltf"></a-asset-item>
       	</a-assets>
 
+          <a-assets>
+            <audio id="myakmyak-voice" src="voice.mp3" preload="auto"></audio>
+          </a-assets>
+
         <a-entity position="0 1 -4" rotation="0 0 0" scale="1 1 1" gltf-model="#monster">
         </a-entity>
 
@@ -222,8 +226,14 @@
                 body.appendChild(monster);*/
 
                 //executed = false;
-                var sceneEl = document.querySelector('a-entity');
-                sceneEl.setAttribute('animation-mixer', '');
+                var myakmyak = document.querySelector('a-entity');
+                myakmyak.setAttribute('animation-mixer', '');
+                myakmyak.setAttribute('sound', {
+                        'src': '#myakmyak-voice',
+                        'volume': 10,
+                        'autoplay': true,
+                        'loop': true
+                        }, true);
 
                 clearInterval(myInterval);
 
@@ -253,8 +263,15 @@
 
                     body.appendChild(monster);*/
                     
-                    var sceneEl = document.querySelector('a-entity');
-                    sceneEl.setAttribute('animation-mixer', '');
+                    var myakmyak = document.querySelector('a-entity');
+                    myakmyak.setAttribute('animation-mixer', '');
+                    myakmyak.setAttribute('sound', {
+                        'src': '#myakmyak-voice',
+                        'volume': 10,
+                        'autoplay': true,
+                        'loop': true
+                        }, true);
+
                 });
             }
             else{
