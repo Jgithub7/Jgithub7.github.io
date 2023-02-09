@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Myakmyak_AR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <link rel="stylesheet" href="index.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="aframe-extras.min.js"></script>
+
+</head>
+<body>
+    <canvas id="preview"></canvas>
+    <canvas id="canvas"></canvas>
+    <video id="video" autoplay playsinline></video>
+    <input id="input1" value="hogehoge" type="hidden">
+
+    <script src="index.js"></script>
+    <script src="opencv_change.js"></script>
+    <script type="text/javascript" src="dotcode.js"></script>
+    <a-scene vr-mode-ui="enabled: false">
+        <a-assets>
+            <a-asset-item id="myakmyak" src="myakmyak.gltf"></a-asset-item>
+            <audio id="myakmyak_japan" src="myakmyak_japan.mp3" preload="auto"></audio>
+            <audio id="myakmyak_english" src="myakmyak_english.mp3" preload="auto"></audio>
+            <audio id="myakmyak_mexican" src="myakmyak_mexican.mp3" preload="auto"></audio>
+
+        </a-assets>
+        <a-entity id="camera-wrapper" rotation="0 0 0" position="0 0 0">
+            <a-camera id="camera" position="0 0 0" rotation="0 0 0" look-contorls=""></a-camera>
+        </a-entity>
+        <!--<a-entity camera position="0 0 0" rotation="0 0 0" look-controls=""></a-entity>-->
+
+    </a-scene>
+
+</body>
+</html>
