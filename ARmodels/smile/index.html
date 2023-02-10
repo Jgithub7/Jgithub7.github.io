@@ -45,7 +45,7 @@ AFRAME.registerComponent('registerevents', {
 			marker.addEventListener("markerFound", ()=> {
 
           var sceneEl = document.querySelector('a-entity');
-          sceneEl.setAttribute('animation-mixer', 'loop:once');
+          sceneEl.setAttribute('animation-mixer', {'loop': once});
 
           var entity = document.querySelector('[sound]');
           entity.components.sound.playSound();
