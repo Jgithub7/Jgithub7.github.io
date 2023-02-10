@@ -22,7 +22,7 @@
     </a-assets>
 
     <a-marker registerevents type="pattern" url="./robot_talk2.patt" >
-      <a-entity position="0 0 -90" rotation="0 0 0" scale="1 1 1" gltf-model="#marsrobot" sound="src: #MarsRobotSound; volume: 10; loop: false" >
+      <a-entity position="0 0 0" rotation="0 0 0" scale="1 1 1" gltf-model="#marsrobot" sound="src: #MarsRobotSound; volume: 10; loop: false" >
       </a-entity>
     </a-marker>
 
@@ -45,7 +45,7 @@ AFRAME.registerComponent('registerevents', {
 			marker.addEventListener("markerFound", ()=> {
 
           var sceneEl = document.querySelector('a-entity');
-          sceneEl.setAttribute('animation-mixer', {'loop': once});
+          sceneEl.setAttribute('animation-mixer', 'loop:once');
 
           var entity = document.querySelector('[sound]');
           entity.components.sound.playSound();
