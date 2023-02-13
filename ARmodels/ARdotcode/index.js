@@ -232,8 +232,9 @@ function successCallback(stream) {
         //引数の結果の値から結果の画像を表示する
         function showResult(result) {
             //範囲外なら何もしない
-            if (result < 1 || 35 < result) return;
-            result += 35;
+            //if (result < 1 || 35 < result) return;
+            //result += 35;
+            if (result < 35 || 70 < result) return;
             var sound = '#voice_japanese';
             if (result % 5 == 2) sound = '#voice_english';
             if (result % 5 == 3) sound = '#voice_spanish';
@@ -250,8 +251,8 @@ function successCallback(stream) {
             if (35 < result && result <= 40) CreateCGIcon("#ar_smile", sound);
             else if (40 < result && result <= 45) CreateCGIcon("#ar_grape", sound);
             else if (45 < result && result <= 50) CreateCGIcon("#ar_fish", sound);
-            else if (50 < result && result <= 55) CreateCGIcon("#ar_dolphin", sound);
-            else if (55 < result && result <= 60) CreateCGIcon("#ar_candy", sound);
+            else if (50 < result && result <= 55) CreateCGIcon("#ar_candy", sound);
+            else if (55 < result && result <= 60) CreateCGIcon("#ar_dolphin", sound);
             else if (60 < result && result <= 65) CreateCGIcon("#ar_mag", sound);
             else if (65 < result && result <= 70) CreateCGIcon("#ar_wineglass", sound);
         }
@@ -291,7 +292,7 @@ function VisibleIcon(ar_icon, sound_src) {
         const cameraWrapper = document.getElementById("camera-wrapper");
         const camera = cameraWrapper.querySelector("a-camera");
         ar_icon.object3D.position.copy(camera.object3D.localToWorld(new THREE.Vector3(0, 2, -4)));
-        ar_icon.object3D.lookAt(camera.object3D.getWorldPosition(new THREE.Vector3()));
+        ar_icon.object3D.lookAt(camera.object3D.localToWorld(new THREE.Vector3()));
         //サウンドをあらかじめ紐づけして再生したら、音声が表示されるより速かったので動的紐づけでやる
         ar_icon.setAttribute('sound', {
             'src': sound_src,
@@ -323,7 +324,7 @@ function CreateCGIcon(cg_src, sound_src) {
     cg.setAttribute('gltf-model', cg_src);
     const cameraWrapper = document.getElementById("camera-wrapper");
     const camera = cameraWrapper.querySelector("a-camera");
-    cg.object3D.position.copy(camera.object3D.localToWorld(new THREE.Vector3(0, 2, -4)));
+    cg.object3D.position.copy(camera.object3D.localToWorld(new THREE.Vector3(0, 1.5, -4)));
     cg.object3D.lookAt(camera.object3D.getWorldPosition(new THREE.Vector3()));
     cg.object3D.scale.set(1, 1, 1);
     cg.object3D.rotation.set(0, 0, 0);
