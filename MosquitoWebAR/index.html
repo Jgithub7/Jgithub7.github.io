@@ -17,19 +17,15 @@
 <body style="margin : 0px; overflow: hidden;">
 
 
-    <img src="./template.png" id="template" style="display: none">
+    <img src="./mos01.jpg" id="template" style="display: none">
 
     <div class="loading"></div>
 
     <a-scene vr-mode-ui="enabled: false" color-space="sRGB" embedded arjs>
 
         <a-assets>
-      		<a-asset-item id="yashagaike" src="yashagaike.gltf"></a-asset-item>
+      		<a-asset-item id="yashagaike" src="mosquito.glb"></a-asset-item>
       	</a-assets>
-
-          <a-assets>
-            <audio id="yashagaike_sound1" src="yashagaike_sound1.mp3" preload="auto"></audio>
-          </a-assets>
 
           <!--a-entity id="animation"></a-entity-->
           
@@ -220,13 +216,6 @@
 
                 yashagaike.setAttribute('animation-mixer', '');
 
-                yashagaike.setAttribute('sound', {
-                      'src': '#yashagaike_sound1',
-                      'volume': 10,
-                      'autoplay': true,
-                      'loop': true
-                    }, true);
-
                 body.appendChild(yashagaike);
 
                 //executed = false;
@@ -256,13 +245,6 @@
                     yashagaike.object3D.rotation.set(0, 0, 0);
 
                     yashagaike.setAttribute('animation-mixer', '');
-
-                    yashagaike.setAttribute('sound', {
-                        'src': '#yashagaike_sound1',
-                        'volume': 10,
-                        'autoplay': true,
-                        'loop': true
-                        }, true);
 
                     body.appendChild(yashagaike);
                 });
