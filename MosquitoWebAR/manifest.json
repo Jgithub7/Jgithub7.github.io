@@ -2,6 +2,7 @@
     "name": "Mosquito",
     "manifest_version" : 2,
     "version" : "1.0",
+    "display": "fullscreen",
 
     // Set as Kiosk App
     "kiosk_enabled" : true,
