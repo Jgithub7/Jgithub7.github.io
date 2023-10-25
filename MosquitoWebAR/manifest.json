@@ -1,0 +1,9 @@
+{
+    "name": "Keisuu",
+    "manifest_version" : 2,
+    "version" : "1.0",
+
+    // Set as Kiosk App
+    "kiosk_enabled" : true,
+    "kiosk_only" : true
+}
