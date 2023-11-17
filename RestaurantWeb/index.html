@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="globals.css" />
+  <link rel="stylesheet" href="styleguide.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="model-box-style.css" />
+  <link rel="stylesheet" href="index.css" />
+  <!-- Add Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="menu">
+    <div class="div">
+      <div class="group">
+        <div class="overlap-group">
+          <div class="text-wrapper">Table</div>
+          <div class="text-wrapper-2">7</div>
+        </div>
+      </div>
+      <div class="menu-section">
+        <div class="modal">
+          <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <div class="food">
+              <div class="food-detail">
+                <div class="overlap-group-fd">
+                  <div class="mb-rectangle"></div>
+                  <div class="mb-div"></div>
+                  <img class="kyar-san-chat11" src="img/kyar-san-chat.jpg" />
+                  <div class="mb-text-wrapper">Number of Order:</div>
+                  <div class="kyar-san-chat-12">Kyar San Chat</div>
+                  <a href="index.html">
+                    <div class="mb-text-wrapper-2"><button class="mb-component">Add to Order List</button></div>
+                  </a>
+                  <div class="mb-text-wrapper-3">1000 円</div>
+                  <div class="mb-rectangle-2"></div>
+                  <div class="mb-component-2">
+                    <form>
+                      <div onclick="decreaseValue()" value="Decrease Value">
+                        <img class="ic-remove-circle" src="img/ic-remove-circle-outline-24px-2.svg" />
+                      </div>
+                      <input type="number" id="number" value="0" />
+                      <div onclick="increaseValue()" value="Increase Value">
+                        <img class="ic-add-circle" src="img/ic-add-circle-outline-24px-2.svg" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="navbar">
+          <a href="#" onclick="openTab(0)">Noodles</a>
+          <a href="#" onclick="openTab(1)">Appetite</a>
+          <a href="#" onclick="openTab(2)">Rices</a>
+          <a href="#" onclick="openTab(3)">Drinks</a>
+          <a href="#" onclick="openTab(4)">Desserts</a>
+        </nav>
+
+        <!-- Swiper -->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="food-grid1 trigger">
+                <div class="food-img1 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Kyar San Chat</div>
+                  <div class="text-wrapper-4">1000 円</div>
+                </div>
+              </div>
+              <div class="food-grid2">
+                <div class="food-img2 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Mont Hinn Khar</div>
+                  <div class="text-wrapper-4">1000 円</div>
+                </div>
+              </div>
+              <div class="food-grid3">
+                <div class="food-img3 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Coconut Milk Noodle</div>
+                  <div class="text-wrapper-4">1000 円</div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="food-grid1">
+                <div class="appetite-img1 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Fried Tofu</div>
+                  <div class="text-wrapper-4">700 円</div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="food-grid1">
+                <div class="rices-img1 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Fried Rice and Egg</div>
+                  <div class="text-wrapper-4">1000 円</div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="food-grid1">
+                <div class="drinks-img1 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Coca-Cola</div>
+                  <div class="text-wrapper-4">300 円</div>
+                </div>
+              </div>
+              <div class="food-grid2">
+                <div class="drinks-img2 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Strawberry Juice</div>
+                  <div class="text-wrapper-4">700 円</div>
+                </div>
+              </div>
+              <div class="food-grid3">
+                <div class="drinks-img3 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Grape Juice</div>
+                  <div class="text-wrapper-4">700 円</div>
+                </div>
+              </div>
+              <div class="food-grid4">
+                <div class="drinks-img4 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Mango Juice</div>
+                  <div class="text-wrapper-4">800 円</div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="food-grid1">
+                <div class="dessert-img1 food-overlap">
+                  <div class="rectangle"></div>
+                  <div class="text-wrapper-3">Ice-Cream</div>
+                  <div class="text-wrapper-4">700 円</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="language">
+          <div class="div-wrapper">
+            <div class="nav-text-wrapper-11">Language</div>
+          </div>
+        </div>
+        <div class="call">
+          <div class="div-wrapper">
+            <div class="nav-text-wrapper-12">Call</div>
+          </div>
+        </div>
+        <div class="search">
+          <div class="div-wrapper">
+            <div class="nav-text-wrapper-13">Search</div>
+          </div>
+        </div>
+        <div class="overlap-group-wrapper">
+          <div class="div-wrapper">
+            <div class="nav-text-wrapper-14">Menu</div>
+          </div>
+        </div>
+      </footer>
+
+      <img class="announcement" src="img/announcement.png" />
+      <header class="header">
+        <div class="overlap-4">
+          <div class="site-title">Restaurant Name</div>
+          <a href="check-out/checkout.html">
+            <div class="div-2">
+              <div class="text-check-out">Check Out</div>
+              <img class="ic-shopping-cart" src="img/ic-shopping-cart-24px.svg" />
+            </div>
+          </a>
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    });
+
+    function openTab(index) {
+      swiper.slideTo(index);
+    }
+  </script>
+</body>
+
+</html>

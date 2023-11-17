@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="globals.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="msg-box-style.css" />
+    <link rel="stylesheet" href="../style.css" />
+
+    <script src="../script.js" defer></script>
+  </head>
+  <body>
+    <div class="check-out">
+      <div class="div">
+        <div class="overlap">
+          <img class="menu" src="../img/menu.png" />
+          
+          <button class="button trigger">
+            <div class="text-wrapper">Confirm</div>
+          </button>
+
+          <div class="modal">
+            <div class="modal-content">
+              <span class="close-button">&times;</span>
+              <div class="msg">
+                <div class="overlap-wrapper-msg">
+                  <div class="overlap-msg">
+                    <div class="rectangle"></div>
+                    <div class="div"></div>
+                    <p class="your-order-is">
+                      Your order is Successfully submitted!<br />We hope you enjoy our delicacies.<br />Thank You for visiting Us
+                      ^.^
+                    </p>
+                    <a href="../index.html">
+                      <button class="c-button">
+                        <div class="text-wrapper">Close</div>
+                      </button>
+                    </a>
+                    <img class="cooking" src="../img/cooking.png" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rectangle"></div>
+          <div class="group">
+            <div class="overlap-2">
+              <div class="rectangle-2"></div>
+              <div class="text-wrapper-2">Your Order List</div>
+            </div>
+          </div>
+          <div class="text-wrapper-3">Price(円)</div>
+          <div class="text-wrapper-4">Amount</div>
+          <div class="text-wrapper-5">Food</div>
+          <div class="text-wrapper-6">Total (円) -</div>
+          <div class="overlap-wrapper">
+            <div class="overlap-3">
+              <div class="text-wrapper-7">Table</div>
+              <div class="text-wrapper-8">7</div>
+            </div>
+          </div>
+          <div class="component">
+            <img class="ohn-no-khauk-swe" src="../img/ohn-no-khauk-swe.jpg" />
+            <div class="coconut-milk-noodle">Coconut Milk<br />Noodle</div>
+            <div class="text-wrapper-9">1000</div>
+            <img class="grapejuice" src="../img/grapejuice.jpg" />
+            <div class="text-wrapper-10">Grape Juice</div>
+            <div class="text-wrapper-11">300</div>
+            <div class="text-wrapper-12">1300</div>
+          </div>
+          <div class="mb-component-2">
+            <form>
+              <div onclick="decreaseValue()" value="Decrease Value">
+                <img class="ic-remove-circle" src="../img/ic-remove-circle-outline-24px-2.svg" />
+              </div>
+              <input type="number" id="number" value="0" />
+              <div onclick="increaseValue()" value="Increase Value">
+                <img class="ic-add-circle" src="../img/ic-add-circle-outline-24px-2.svg" />
+              </div>
+            </form>
+          </div>
+          <div class="mb-component-2">
+            <form>
+              <div onclick="decreaseValue()" value="Decrease Value">
+                <img class="ic-remove-circle" src="img/ic-remove-circle-outline-24px-2.svg" />
+              </div>
+              <input type="number" id="number" value="0" />
+              <div onclick="increaseValue()" value="Increase Value">
+                <img class="ic-add-circle" src="img/ic-add-circle-outline-24px-2.svg" />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="overlap-4">
+          <header class="header">
+            <div class="overlap-5">
+              <div class="site-title">Restaurant Name</div>
+              <div class="div-2">
+                <div class="text-check-out">Check Out</div>
+                <img class="ic-shopping-cart" src="../img/ic-shopping-cart-24px.svg" />
+              </div>
+            </div>
+          </header>
+        </div>
+        <footer class="footer">
+          <div class="language">
+            <div class="div-wrapper"><div class="nav-text-wrapper-11">Language</div></div>
+          </div>
+          <div class="call">
+            <div class="div-wrapper"><div class="nav-text-wrapper-12">Call</div></div>
+          </div>
+          <div class="search">
+            <div class="div-wrapper"><div class="nav-text-wrapper-13">Search</div></div>
+          </div>
+          <a href="../index.html">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper"><div class="nav-text-wrapper-14">Menu</div></div>
+            </div>
+          </a>
+        </footer>
+        <img class="announcement" src="../img/announcement.png" />
+      </div>
+    </div>
+  </body>
+</html>

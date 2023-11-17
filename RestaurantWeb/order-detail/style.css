@@ -1,0 +1,159 @@
+.food {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.food .food-detail {
+  width: 360px;
+  height: 640px;
+}
+
+.food .overlap-group {
+  position: relative;
+  height: 640px;
+}
+
+.food .rectangle {
+  position: absolute;
+  width: 360px;
+  height: 640px;
+  top: 0;
+  left: 0;
+  background-color: var(--rgb77-77-77);
+  opacity: 0.5;
+}
+
+.food .div {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 100px;
+  left: 40px;
+  background-color: var(--rgb255-255-255);
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px #00000029;
+}
+
+.food .mask-group {
+  position: absolute;
+  width: 23px;
+  height: 16px;
+  top: 0;
+  left: 22px;
+}
+
+.food .kyar-san-chat {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  top: 125px;
+  left: 65px;
+  object-fit: cover;
+}
+
+.food .text-wrapper {
+  position: absolute;
+  top: 297px;
+  left: 99px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #232323;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.food .kyar-san-chat-2 {
+  position: absolute;
+  top: 187px;
+  left: 225px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #232323;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.food .component {
+  position: absolute;
+  width: 114px;
+  height: 26px;
+  top: 329px;
+  left: 123px;
+  background-color: var(--rgb255-255-255);
+  border-radius: 13px;
+  overflow: hidden;
+  border: 2px solid;
+  border-color: #ff7600;
+}
+
+.food .text-wrapper-2 {
+  position: absolute;
+  top: 3px;
+  left: 8px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #ff7600;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.food .text-wrapper-3 {
+  position: absolute;
+  top: 208px;
+  left: 225px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #232323;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.food .ic-clear {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: 113px;
+  left: 295px;
+}
+
+.food .rectangle-2 {
+  position: absolute;
+  width: 23px;
+  height: 16px;
+  top: 297px;
+  left: 215px;
+  background-color: var(--rgb255-255-255);
+}
+
+.food .component-2 {
+  position: absolute;
+  width: 66px;
+  height: 16px;
+  top: 297px;
+  left: 195px;
+}
+
+.food .ic-remove-circle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 1px;
+  left: 0;
+  object-fit: cover;
+}
+
+.food .ic-add-circle {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 1px;
+  left: 51px;
+  object-fit: cover;
+}

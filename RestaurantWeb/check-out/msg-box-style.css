@@ -1,0 +1,78 @@
+.msg {
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.msg .overlap-wrapper-msg {
+  width: 360px;
+  height: 640px;
+}
+
+.msg .overlap-msg {
+  position: relative;
+  height: 640px;
+}
+
+.msg .rectangle {
+  position: absolute;
+  width: 360px;
+  height: 640px;
+  top: 0;
+  left: 0;
+  background-color: var(--rgb77-77-77);
+  opacity: 0.5;
+}
+
+.msg .div {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: 130px;
+  left: 40px;
+  background-color: var(--rgb255-255-255);
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px #00000029;
+}
+
+.msg .your-order-is {
+  position: absolute;
+  top: 269px;
+  left: 63px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #4d4d4d;
+  font-size: 14px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 23px;
+}
+
+.msg .cooking {
+  position: absolute;
+  width: 109px;
+  height: 109px;
+  top: 145px;
+  left: 126px;
+  object-fit: cover;
+}
+
+.msg .c-button {
+  position: absolute;
+  top: 55%;
+  left: 40%;
+  width: 76px;
+  height: 26px;
+  background-color: var(--rgb255-118-0);
+  border-radius: 13px;
+  border: 1px solid;
+  border-color: #ff7600;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.msg .c-button:hover{
+  cursor: pointer;
+}

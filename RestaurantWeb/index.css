@@ -1,0 +1,332 @@
+.menu {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.menu .div {
+  background-color: #ffdbbc;
+  overflow: hidden;
+  width: 360px;
+  height: 640px;
+  position: relative;
+}
+
+.menu .group {
+  position: absolute;
+  width: 100px;
+  height: 96px;
+  top: 503px;
+  left: 264px;
+}
+
+.menu .overlap-group {
+  width: 96px;
+  height: 96px;
+  background-image: url(./img/paper.png);
+  position: relative;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.menu .text-wrapper {
+  position: absolute;
+  top: 32px;
+  left: 24px;
+  text-shadow: 0px 3px 3px #00000029;
+  font-family: "Segoe Script-Bold", Helvetica;
+  font-weight: 700;
+  color: #232323;
+  font-size: 17px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.menu .text-wrapper-2 {
+  position: absolute;
+  top: 57px;
+  left: 38px;
+  font-family: "Segoe Script-Bold", Helvetica;
+  font-weight: 700;
+  color: #232323;
+  font-size: 25px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+.menu .menu-section {
+  position: absolute;
+  width: 360px;
+  height: 328px;
+  top: 150px;
+  left: 0;
+}
+
+.menu .rectangle {
+  position: absolute;
+  width: 154px;
+  height: 48px;
+  top: 82px;
+  background-color: var(--rgb0-0-0);
+  border-radius: 0px 0px 10px 10px;
+  border: 1px solid;
+  border-color: #707070;
+  opacity: 0.5;
+}
+
+.menu .text-wrapper-3 {
+  position: absolute;
+  top: 91px;
+  left: 14px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.menu .text-wrapper-4 {
+  top: 107px;
+  position: absolute;
+  left: 14px;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 11px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.menu .food-grid1 {
+  position: absolute;
+  width: 154px;
+  height: 130px;
+  top: 50px;
+  left: 20px;
+}
+
+.menu .food-grid2 {
+  position: absolute;
+  width: 154px;
+  height: 130px;
+  top: 50px;
+  left: 190px;
+}
+
+.menu .food-grid3 {
+  position: absolute;
+  width: 154px;
+  height: 130px;
+  top: 198px;
+  left: 20px;
+}
+
+.menu .food-grid4 {
+  position: absolute;
+  width: 154px;
+  height: 130px;
+  top: 198px;
+  left: 190px;
+}
+
+.menu .food-overlap {
+  position: relative;
+  width: 154px;
+  height: 130px;
+  left: -3px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.menu .food-img1 {
+  background-image: url(./img/kyar-san-chat.jpg);
+}
+
+.menu .food-img2 {
+  background-image: url(./img/mont-hnin-khar.jpg);
+}
+
+.menu .food-img3 {
+  background-image: url(./img/ohn-no-khauk-swe.jpg);
+}
+
+.menu .appetite-img1 {
+  background-image: url(./img/tofu.jpg);
+}
+
+.menu .rices-img1 {
+  background-image: url(./img/fried-rice.jpg);
+}
+
+.menu .drinks-img1 {
+  background-image: url(./img/cola.jpg);
+}
+
+.menu .drinks-img2 {
+  background-image: url(./img/StrawberryJuice.jpg);
+}
+
+.menu .drinks-img3 {
+  background-image: url(./img/grapejuice.jpg);
+}
+
+.menu .drinks-img4 {
+  background-image: url(./img/mango.jpg);
+}
+
+.menu .dessert-img1 {
+  background-image: url(./img/ice-cream.jpg);
+}
+
+.menu .navbar {
+  position: absolute;
+  width: 360px;
+  height: 35px;
+  top: 0;
+  left: 0;
+  background-color: #ffefe2;
+  box-shadow: 0px 3px 3px #00000029;
+}
+
+.menu .overlap-3 {
+  position: absolute;
+  width: 50px;
+  height: 17px;
+  top: 9px;
+  left: 20px;
+}
+
+.menu .line {
+  position: absolute;
+  width: 49px;
+  height: 1px;
+  top: 16px;
+  left: 0;
+  object-fit: cover;
+}
+
+.menu .overlap-4 {
+  position: relative;
+  width: 360px;
+  height: 50px;
+  background-color: var(--rgb255-255-255);
+  box-shadow: 0px 3px 3px #00000029;
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.1);
+  transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+  z-index: 10;
+}
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 1.5rem;
+  width: 30em;
+  border-radius: 0.5rem;
+}
+.close-button {
+  position: absolute;
+  left: 73%;
+  top: 18%;
+  width: 1.5rem;
+  font-size: 2em;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  background-color: var(--clr-neutral);
+  color: var(--clr-dark);
+  transition: color 0.12s ease-in-out;
+  z-index: 1;
+}
+.close-button:hover {
+  color: var(--clr-main);
+  cursor: pointer;
+}
+.show-modal {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1.0);
+  transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.value-button:hover {
+  cursor: pointer;
+}
+
+nav a {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  color: #4d4d4d;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+  float: left;
+  text-align: center;
+  padding: 0.5rem 0.5rem;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #ff7600;
+}
+/*
+.tabs-buttons {
+  height: auto;
+  box-shadow: inset 0 -2px #e6e6e6;
+  z-index: 2;
+}
+.tabs-buttons .swiper-wrapper {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-family: "Segoe UI-Semibold", Helvetica;
+  color: #4d4d4d;
+  font-size: 13px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+.tabs-buttons .swiper-slide {
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+.tabs-buttons .active-tab {
+  opacity: 1;
+  border-bottom-color: red;
+}*/
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
