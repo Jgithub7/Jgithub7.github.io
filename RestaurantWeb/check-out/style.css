@@ -360,3 +360,9 @@
   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
 }
 
+.component-2 {
+  position: absolute;
+  width: 66px;
+  height: 16px;
+  left: 186px;
+}
