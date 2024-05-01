@@ -21,9 +21,12 @@
             <a-asset-item id="lizard" src="./newt_animation04.gltf"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro">
-            <a-entity gltf-model="#lizard" scale="1 1 1" animation-mixer></a-entity>
-        </a-marker>
+        <a-entity 
+            gps-entity-place="latitude: 37.7749; longitude: -122.4194"
+            gltf-model="#lizard" 
+            scale="1 1 1" 
+            animation-mixer>
+        </a-entity>
         <a-entity gps-camera></a-entity>
     </a-scene>
 
@@ -33,7 +36,7 @@
 <script>
     AFRAME.registerComponent('registerevents', {
         init: function () {
-            var sceneEl = document.querySelector('a-entity');
+            var sceneEl = document.querySelector('a-entity[gltf-model]');
             sceneEl.setAttribute('animation-mixer', '');
         },
     });
