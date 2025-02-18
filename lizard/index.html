@@ -4,44 +4,24 @@
 <head>
     <!-- <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <title>Lizard Simulation</title>
+    <title>Lizard</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/dev/aframe/build/aframe-ar.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-toggle-controls-component/dist/aframe-toggle-controls-component.min.js">
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
-<body style="margin : 0px; overflow: hidden;">
-
+<body style="margin : 0px; overflow: hidden; background-color: aqua;">
     <a-scene embedded arjs vr-mode-ui="enabled: false">
+        <!-- Camera and Controls -->
+        <a-entity camera look-controls position="0 1.6 0"></a-entity>
+        <a-light type="directional" color="#fff" intensity="1" position="1 1 1"></a-light>
 
-        <a-assets>
+        <a-entity gltf-model="url(newt_animation04.gltf)" animation-mixer>
+        </a-entity>
+        <!--a-assets>
             <a-asset-item id="lizard" src="./newt_animation04.gltf"></a-asset-item>
         </a-assets>
-
-        <a-entity 
-            gps-entity-place="latitude: 37.7749; longitude: -122.4194"
-            gltf-model="#lizard" 
-            scale="1 1 1" 
-            animation-mixer>
-        </a-entity>
-        <a-entity gps-camera></a-entity>
+        <a-entity position="0 0 0" rotation="0 0 0" scale="1 1 1" gltf-model="#lizard">
+        </a-entity-->
     </a-scene>
-
-
 </body>
-
-<script>
-    AFRAME.registerComponent('registerevents', {
-        init: function () {
-            var sceneEl = document.querySelector('a-entity[gltf-model]');
-            sceneEl.setAttribute('animation-mixer', '');
-        },
-    });
-
-</script>
-
 
 </html>
