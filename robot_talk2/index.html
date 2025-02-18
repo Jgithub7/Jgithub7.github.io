@@ -21,13 +21,13 @@
       <a-asset-item id="marsrobot" src="./talkingRobot.gltf"></a-asset-item>
     </a-assets>
 
-    <a-marker registerevents type="pattern" url="./robot_talk2.patt" >
+    <a-marker registerevents type="pattern" url="./pattern-talking_robot.patt" >
       <a-entity position="0 0 0" rotation="0 0 0" scale="1 1 1" gltf-model="#marsrobot" sound="src: #MarsRobotSound; volume: 10; loop: true" >
       </a-entity>
     </a-marker>
 
     <a-assets>
-      <audio id="MarsRobotSound" src="flowerJp.mp3"></audio>
+      <audio id="MarsRobotSound" src="intro_english.mp3"></audio>
     </a-assets>
 
     <a-entity camera></a-entity>
